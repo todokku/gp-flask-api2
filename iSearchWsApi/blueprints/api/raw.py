@@ -1,5 +1,5 @@
+import requests, sys, webbrowser, copy, json
 from flask import Blueprint, request, jsonify
-import requests, sys, getopt, webbrowser, copy, json
 from iSearchWsApi.blueprints import mockdata
 
 raw = Blueprint('raw', __name__, url_prefix='/raw')
@@ -17,7 +17,7 @@ headers_Get = {
         'Upgrade-Insecure-Requests': '1'
     }
 
-@raw.route('/google')
+@raw.route('/google', methods=['GET'])
 def googleRaw():
     # from
     # https://automatetheboringstuff.com/chapter11/
@@ -39,7 +39,7 @@ def googleRaw():
       else:
         return ('{"message": "mocked"}')
     #if (mock == 0):
-    res = requests.get('https://google.com/search?q=' +q+ "&oq="+q+"&hl=en&gl=us&sourceid=chrome&ie=UTF-8")
+    res = requests.get('https://google.com/search?q=' +q+ '&oq='+q+'&hl=en&gl=us&sourceid=chrome&ie=UTF-8')
     res.raise_for_status()
 
 #   print some html reponse information
