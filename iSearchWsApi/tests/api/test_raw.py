@@ -7,60 +7,41 @@ from iSearchWsApi.blueprints import mockdata
 #print(mockdata.mockDataCats)
 #print(mockdata.mockDataCars)
 
-class TestSearch(object):
-    def test_google_api(self, client):
-        """ google api should respond with a success 200. """
-        response = client.get(url_for('search.google')+'?q=test')
+class TestRaw(object):
+    def test_google_raw(self, client):
+        """ google raw should respond with a success 200. """
+        response = client.get(url_for('raw.googleRaw')+'?q=test')
         assert response.status_code == 200
 
-    def test_ddg_api(self, client):
+    def test_ddg_raw(self, client):
         """ ddg api should respond with a success 200. """
-        response = client.get(url_for('search.ddg'))
+        response = client.get(url_for('raw.ddgRaw'))
         assert response.status_code == 200
 
-    def test_bing_api(self, client):
+    def test_bing_raw(self, client):
         """ bing api should respond with a success 200. """
-        response = client.get(url_for('search.bing'))
+        response = client.get(url_for('raw.bingRaw'))
         assert response.status_code == 200
 
-    def test_multi_api(self, client):
+    def test_multi_raw(self, client):
         """ multi-engine api should respond with a success 200. """
-        response = client.get(url_for('search.multipleEngines'))
+        response = client.get(url_for('raw.multipleEnginesRaw'))
         assert response.status_code == 200
 
-# --- Google search API testing
-@pytest.mark.parametrize(('query', 'message', 'count'), (
-    ('cats', b'{"message": "ERROR: not yet supported"}', 10),
-    ('cars', b'{"message": "ERROR: not yet supported"}', 13),
-    ('kittens', b'{"message": "ERROR: not yet supported"}', 10),
-    #('blocked', {"message": "blocked"}, 0),
-))
-
-def test_google_search_live(client, query, message, count):
-    response = client.get(
-        '/search/google?q='+query
-    )
-
-    dic = json.loads(response.data)
-    #assert query in dic.search_parameters.q
-    assert query in dic['search_parameters']['q']
-    #assert message in response.data.search_parameters.q
-    assert count == len(dic['organic_results'])
-
-
+# --- Google Raw API testing
 @pytest.mark.parametrize(('query', 'message'), (
     #('cats', '{"message": "mocked"}'),
-    ('cats', mockdata.mockDataCats),
+    ('cats', mockdata.mockDataCatsHtml),
     #('cars', '{"message": "mocked"}'),
-    ('cars', mockdata.mockDataCars),
+    ('cars', mockdata.mockDataCarsHtml),
     #('kittens', b'{"message": "mocked"}'),
-    ('kittens', mockdata.mockDataKittens),
+    ('kittens', mockdata.mockDataKittensHtml),
     ('other', {"message": "mocked"}),
 ))
 
-def test_google_search_mock(client, query, message):
+def test_google_raw_mock(client, query, message):
     response = client.get(
-        '/search/google?q='+query+'&mock=1'
+        '/raw/google?q='+query+'&mock=1'
     )
 
     mockResponse = json.loads(response.data.decode('utf-8'))
@@ -72,9 +53,9 @@ def test_google_search_mock(client, query, message):
     assert message == mockResponse
     #assert message == response.data
 
-def test_google_search_blocked(client):
+def test_google_raw_blockedk(client):
     response = client.get(
-        '/search/google?q='+'blocked'+'&blocked=1'
+        '/raw/google?q='+'blocked'+'&blocked=1'
     )
 
     mockResponse = json.loads(response.data.decode('utf-8'))
@@ -82,46 +63,46 @@ def test_google_search_blocked(client):
     assert {'message': 'ERROR: we have been BLOCKED'} == mockResponse
 
 
-# --- DDG search API testing
+# --- DDG Raw API testing
+
 @pytest.mark.parametrize(('query', 'message'), (
     ('cats', b'{"message": "ERROR: not yet supported"}'),
     ('cars', b'{"message": "ERROR: not yet supported"}'),
     ('kittens', b'{"message": "ERROR: not yet supported"}'),
 ))
 
-def test_ddg_search_live(client, query, message):
+def test_ddg_raw_mock(client, query, message):
     response = client.get(
-        '/search/ddg?q='+query
+        '/raw/ddg?q='+query
     )
     assert message in response.data
 
 
 
-# --- Bing search API testing
+# --- Bing Raw API testing
 @pytest.mark.parametrize(('query', 'message'), (
     ('cats', b'{"message": "ERROR: not yet supported"}'),
     ('cars', b'{"message": "ERROR: not yet supported"}'),
     ('kittens', b'{"message": "ERROR: not yet supported"}'),
 ))
 
-def test_bing_search_live(client, query, message):
+def test_bing_raw_mock(client, query, message):
     response = client.get(
-        '/search/bing?q='+query
+        '/raw/bing?q='+query
     )
     assert message in response.data
 
 
-
-# --- Multi search API testing
+# --- Multi Raw API testing
 @pytest.mark.parametrize(('query', 'message'), (
     ('cats', b'{"message": "ERROR: not yet supported"}'),
     ('cars', b'{"message": "ERROR: not yet supported"}'),
     ('kittens', b'{"message": "ERROR: not yet supported"}'),
 ))
 
-def test_multi_search_live(client, query, message):
+def test_multi_raw_mock(client, query, message):
     response = client.get(
-        '/search/multi?q='+query
+        '/raw/multi?q='+query
     )
     assert message in response.data
 

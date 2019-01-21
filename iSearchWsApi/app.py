@@ -2,7 +2,9 @@ from flask import Flask
 #from celery import Celery
 
 from iSearchWsApi.blueprints.page.views import page
-from iSearchWsApi.blueprints.api.search import api
+from iSearchWsApi.blueprints.api.raw import raw
+from iSearchWsApi.blueprints.api.search import search
+from iSearchWsApi.blueprints.api.api import api
 #from snakeeyes.extensions import debug_toolbar, mail, csrf
 from iSearchWsApi.extensions import csrf
 
@@ -22,8 +24,9 @@ def create_app(settings_override=None):
         app.config.update(settings_override)
 
     app.register_blueprint(page)
+    app.register_blueprint(raw)
+    app.register_blueprint(search)
     app.register_blueprint(api)
-    #app.register_blueprint(contact)
     extensions(app)
 
     return app
@@ -42,7 +45,7 @@ def extensions(app):
 
     return None
 
-# only used if: python snakeeyes/app.py
+# only used if: python iSearchWsApi/app.py
 if __name__ == "__main__":
 	app = create_app()
 	app.run(debug=True)

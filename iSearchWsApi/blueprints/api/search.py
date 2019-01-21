@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 import requests, sys, getopt, webbrowser, copy
 from bs4 import BeautifulSoup
 
-api = Blueprint('api', __name__, url_prefix='/api')
+search = Blueprint('search', __name__, url_prefix='/search')
 
 verbose = 9 # all the debug prints
 
@@ -33,7 +33,7 @@ data = {
     }
 
 
-@api.route('/google')
+@search.route('/google')
 def google():
     # from
     # https://automatetheboringstuff.com/chapter11/
@@ -243,15 +243,15 @@ def google():
     #return ('{"message": "ERROR: not yet supported"}')
 
 
-@api.route('/ddg')
+@search.route('/ddg')
 def ddg():
     return ('{"message": "ERROR: not yet supported"}')
 
-@api.route('/bing')
+@search.route('/bing')
 def bing():
     return ('{"message": "ERROR: not yet supported"}')
 
-@api.route('/multi')
+@search.route('/multi')
 # multiple engines
 def multipleEngines():
     return ('{"message": "ERROR: not yet supported"}')
