@@ -1,1 +1,1 @@
-web: flask translate compile; gunicorn "isearch-ws-api.app:create_app()"
+web: flask translate compile; gunicorn "iSearchWsApi.app:create_app()"

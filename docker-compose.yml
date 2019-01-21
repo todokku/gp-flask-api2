@@ -24,7 +24,7 @@ services:
       gunicorn -b 0.0.0.0:5000
         --access-logfile -
         --reload
-        "isearch-ws-api.app:create_app()"
+        "iSearchWsApi.app:create_app()"
     env_file:
       - '.env'
     volumes:

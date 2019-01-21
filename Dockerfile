@@ -12,4 +12,4 @@ RUN pip install -r requirements.txt
 COPY . .
 RUN pip install --editable .
 
-CMD gunicorn -b 0.0.0.0:5000 --access-logfile - "isearch-ws-api.app:create_app()"
+CMD gunicorn -b 0.0.0.0:5000 --access-logfile - "iSearchWsApi.app:create_app()"
