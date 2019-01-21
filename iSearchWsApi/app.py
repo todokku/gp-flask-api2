@@ -1,10 +1,10 @@
 from flask import Flask
 #from celery import Celery
 
-from snakeeyes.blueprints.page.views import page
-from snakeeyes.blueprints.api.search import api
+from iSearchWsApi.blueprints.page.views import page
+from iSearchWsApi.blueprints.api.search import api
 #from snakeeyes.extensions import debug_toolbar, mail, csrf
-from snakeeyes.extensions import csrf
+from iSearchWsApi.extensions import csrf
 
 def create_app(settings_override=None):
     """

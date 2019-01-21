@@ -1,6 +1,6 @@
 import pytest
 
-from snakeeyes.app import create_app
+from iSearchWsApi.app import create_app
 
 
 @pytest.yield_fixture(scope='session')

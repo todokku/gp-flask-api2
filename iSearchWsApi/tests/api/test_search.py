@@ -1,7 +1,7 @@
 import pytest
 from flask import url_for
 import json
-from snakeeyes.blueprints import mockdata
+from iSearchWsApi.blueprints import mockdata
 
 #print(mockdata.mockDataKittens)
 #print(mockdata.mockDataCats)
@@ -31,7 +31,7 @@ class TestSearch(object):
 # --- Google API testing
 @pytest.mark.parametrize(('query', 'message', 'count'), (
     ('cats', b'{"message": "ERROR: not yet supported"}', 10),
-    ('cars', b'{"message": "ERROR: not yet supported"}', 12),
+    ('cars', b'{"message": "ERROR: not yet supported"}', 13),
     ('kittens', b'{"message": "ERROR: not yet supported"}', 10),
     #('blocked', {"message": "blocked"}, 0),
 ))
