@@ -19,11 +19,18 @@ with Flask, Redis, and Docker.
 - Responding with JSON from Flask and creating AJAX requests
 
 ## Python Dev setup
-### activate Virtual ENV (api2)/workon api2
+
+### create VirtualEnv
 
 ```
-C:\Users\x\Documents\GitHub\gp-flask-api2>.\venv\Scripts\activate
+mkvirtualenv api2
+setprojectdir .
+pip install -r requirements.txt
+```
 
+### activate VirtualEnv (api2)/workon api2
+
+```
 C:\Users\x\Documents\GitHub\gp-flask-api2>workon api2
 ```
 
