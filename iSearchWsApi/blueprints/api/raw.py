@@ -49,16 +49,24 @@ def googleRaw():
       res = requests.get('https://google.com/search?q=' +q+ '&oq='+q+'&hl=en&gl=us&sourceid=chrome&ie=UTF-8')
     #res.raise_for_status()  # not in production
     if (res.status_code >= 400) and (res.status_code < 500):
-      return('<html><head></head><body><h2>ERROR Returned '+str(res.status_code)+
+      """
+      return('<html><head></head><body><h2>Client ERROR Returned '+str(res.status_code)+
         '</h2><p>'+res.text+'<br></body></html>')
+      """
+      print ('Client ERROR Returned '+str(res.status_code))
+      return(res.text)
 
     if (res.status_code >= 500) and (res.status_code < 600):
-      return('<html><head></head><body><h2>Internal Error Returned '+str(res.status_code)+
+      """
+      return('<html><head></head><body><h2>Server Error Returned '+str(res.status_code)+
         '</h2><p>'+res.text+'<br></body></html>')
+      """
+      print ('Server ERROR Returned '+str(res.status_code))
+      return(res.text)
 
 #   print some html reponse information
     if (verbose > 0):
-      print("status = "+str(res.status_code))
+      print("status code = "+str(res.status_code))
       if "blocked" in res.text:
         print( "we've been blocked")
         return ('{"message": "ERROR: we have been BLOCKED"}')
