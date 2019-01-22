@@ -31,7 +31,7 @@ class TestSearch(object):
 # --- Google search API testing
 @pytest.mark.parametrize(('query', 'message', 'count'), (
     ('cats', b'{"message": "ERROR: not yet supported"}', 10),
-    ('cars', b'{"message": "ERROR: not yet supported"}', 13),
+    #('cars', b'{"message": "ERROR: not yet supported"}', 13),
     ('kittens', b'{"message": "ERROR: not yet supported"}', 10),
     #('blocked', {"message": "blocked"}, 0),
 ))
@@ -42,11 +42,24 @@ def test_google_search_live(client, query, message, count):
     )
 
     dic = json.loads(response.data)
-    #assert query in dic.search_parameters.q
     assert query in dic['search_parameters']['q']
-    #assert message in response.data.search_parameters.q
     assert count == len(dic['organic_results'])
 
+@pytest.mark.parametrize(('query', 'message', 'count'), (
+    ('cars', b'{"message": "ERROR: not yet supported"}', 13),
+))
+
+def test_google_search_live_oneoff(client, query, message, count):
+    response = client.get(
+        '/search/google?q='+query
+    )
+
+    dic = json.loads(response.data)
+    assert query in dic['search_parameters']['q']
+    if (count != len(dic['organic_results'])):
+      assert count-1 == len(dic['organic_results'])
+    else:
+      assert count == len(dic['organic_results'])
 
 @pytest.mark.parametrize(('query', 'message'), (
     #('cats', '{"message": "mocked"}'),
