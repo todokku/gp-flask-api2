@@ -1,1 +1,1 @@
-web: gunicorn iSearchWsApi.app:create_app()
+web: gunicorn 'iSearchWsApi.app:create_app()'
