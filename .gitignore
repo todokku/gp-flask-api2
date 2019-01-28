@@ -12,6 +12,8 @@ build/manifest.json
 develop-eggs/
 dist/
 eggs/
+include/
+lib/
 parts/
 sdist/
 var/
