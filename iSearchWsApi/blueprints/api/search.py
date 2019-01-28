@@ -134,13 +134,13 @@ def parseJsonResults(dicResults, q):
       print (total_results)
 
     # then return HTML
-    html="<!DOCTYPE doctype html>"
+    html="<!DOCTYPE doctype html><head></head><body>"
 #    for x in range(len(resultStats)):
 #        html=html+"<p>"+str(resultStats[x])+"<br>"
-    for x in range(len(total_results)):
-         html=html+"<p>"+total_results[x]+"<br>"
-         if (verbose > 5):
-             print ("<p>"+total_results[x]+"<br>")
+    #for x in range(len(total_results)):
+    html=html+"<p>"+total_results+"<br>"
+    if (verbose > 5):
+        print ("<p>"+total_results+"<br>")
     html=html+"<h2>Related Searches</h2>"
     for x in range(len(relatedSearches)):
         html=html+str(relatedSearches[x])+"<br><br>"
@@ -156,8 +156,10 @@ def parseJsonResults(dicResults, q):
         # can have link without snippet?
         if (verbose > 5):
             print("linkElems="+str(len(linkElems))+" abstractElems="+str(len(abstractElems))+" x="+str(x)+"\n")
-        if ((len(abstractElems)) >= x-1):
+        if ((len(abstractElems)) > x):
             html=html+str(abstractElems[x])+"<br><br>"
+
+    html=html+"</body></html>"
 
     # then gen JSON
 
