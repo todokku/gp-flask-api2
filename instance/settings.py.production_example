@@ -1,6 +1,7 @@
 DEBUG = False
 
-SERVER_NAME = 'isearch.com'
+#SERVER_NAME = 'isearch.com'
+SERVER_NAME = 'app.isearch.com'
 SECRET_KEY = 'generateastrong128chartoken'
 
 MAIL_USERNAME = 'you@realemailaccount.com'
