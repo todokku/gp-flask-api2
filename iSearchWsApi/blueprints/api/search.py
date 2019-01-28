@@ -48,33 +48,55 @@ def google():
 
     if (mock):
       if (q == 'kittens'):
-        return(jsonify(mockdata.mockDataKittens))
+        #return(jsonify(mockdata.mockDataKittens))
+        #return(parseJsonResults(json.loads(mockdata.mockDataKittens)))
+        return(parseJsonResults(mockdata.mockDataKittensHtml, q))
       elif (q == 'cats'):
-        return(jsonify(mockdata.mockDataCats))
+        #return(jsonify(mockdata.mockDataCats))
+        return(parseJsonResults(mockdata.mockDataCatsHtml, q))
       elif (q == 'cars'):
-        return(jsonify(mockdata.mockDataCars))
+        #return(jsonify(mockdata.mockDataCars))
+        return(parseJsonResults(mockdata.mockDataCarsHtml, q))
       else:
         return ('{"message": "mocked"}')
     #if (mock == 0):
     #else:
     #res = requests.get('http://google.com/search?q=' + q)
     res = requests.get('https://google.com/search?q=' +q+ "&oq="+q+"&hl=en&gl=us&sourceid=chrome&ie=UTF-8")
-    res.raise_for_status()
+    #res.raise_for_status() # not in production
+    if (res.status_code >= 400) and (res.status_code < 500):
+      """
+      return('<html><head></head><body><h2>Client ERROR Returned '+str(res.status_code)+
+        '</h2><p>'+res.text+'<br></body></html>')
+      """
+      print ('Client ERROR Returned '+str(res.status_code))
+      return(res.text)
+
+    if (res.status_code >= 500) and (res.status_code < 600):
+      """
+      return('<html><head></head><body><h2>Server Error Returned '+str(res.status_code)+
+        '</h2><p>'+res.text+'<br></body></html>')
+      """
+      print ('Server ERROR Returned '+str(res.status_code))
+      return(res.text)
 
 #   print some html reponse information
     if (verbose > 0):
       print("status = "+str(res.status_code))
-      if "blocked" in res.text:
-        print( "we've been blocked")
-        return ('{"message": "ERROR: we have been BLOCKED"}')
       print (res.headers.get("content-type", "unknown"))
+    return(parseJsonResults(res.text, q))
+
+def parseJsonResults(dicResults, q):
 
 # Retrieve top search result links.
-    soup = BeautifulSoup(res.text,"html.parser")
+    #soup = BeautifulSoup(res.text,"html.parser")
+    soup = BeautifulSoup(dicResults,"html.parser")
 #   print("soup ="+soup)
 #   print(soup)
 
 # Open a browser tab for each result.
+    result_count = [ 0 ]
+
     linkElems = soup.select('.r a') # osearch links and titles
     abstractElems = soup.select('.st') # osearch snippets
     relatedSearches = soup.select('.aw5cc a')
@@ -105,53 +127,58 @@ def google():
 
 #    print(*resultStats, sep = "\n")
 #    total_results = int(resultStats[0])
-    total_results = result_count
+    total_results = result_count[0]
 
     if (verbose > 3):
       print("\n\ntotal_results")
       print (total_results)
 
+    # then return HTML
+    html="<!DOCTYPE doctype html>"
+#    for x in range(len(resultStats)):
+#        html=html+"<p>"+str(resultStats[x])+"<br>"
+    for x in range(len(total_results)):
+         html=html+"<p>"+total_results[x]+"<br>"
+         if (verbose > 5):
+             print ("<p>"+total_results[x]+"<br>")
+    html=html+"<h2>Related Searches</h2>"
+    for x in range(len(relatedSearches)):
+        html=html+str(relatedSearches[x])+"<br><br>"
+        if (verbose > 5):
+            print(str(relatedSearches[x])+"<br><br>")
+    html=html+"<h2>Related Questions</h2>"
+
+    html=html+"<h2>Organic Results</h2>"
+    for x in range(len(linkElems)): 
+        html=html+str(linkElems[x])+"<br>"
+        if (verbose > 5):
+            print("linkElems="+str(len(linkElems))+" x="+str(x)+"\n")
+        # can have link without snippet?
+        if (verbose > 5):
+            print("linkElems="+str(len(linkElems))+" abstractElems="+str(len(abstractElems))+" x="+str(x)+"\n")
+        if ((len(abstractElems)) >= x-1):
+            html=html+str(abstractElems[x])+"<br><br>"
+
     # then gen JSON
-    #data1 = data # empty struct
-    #data1 = data[:] # empty struct
-    # https://stackoverflow.com/questions/5105517/deep-copy-of-a-dict-in-python
-    data1 = copy.deepcopy(data) # empty struct
-    if (verbose > 6):
-      print("post-copy, pre-fill data1: ")
-      print(data1)
 
-    data1["search_parameters"]["q"]= q
-    data1["search_information"]["total_results"]= total_results[0]
-    # "organic_results": []
-    for x in range(len(titleElems)):
-      position = x
-      title = titleElems[x].text
-      #print("title = "+title+"\n")
-      link = titleElems[x]["href"][7:] # remove /url?q=
-      #print("link = "+link+"\n")
-      # can have link without snippet?
-      if (verbose > 5):
-        print("linkElems="+str(len(linkElems))+" abstractElems="+str(len(abstractElems))+" x="+str(x)+"\n")
-      if (len(abstractElems) > x):
-        snippet = abstractElems[x].text
-      else:
-        snippet = ''
-      data1["organic_results"].append({ "position": position, "title" : title, "link": link, "snippet": snippet })
+    json1 = '{ "search_parameters": { "q": "'+q
+    json2 = '"}, "search_information": { "total_results": '+total_results[0]
+    json3 = '},"related_questions": [],"organic_results": ['
+#
+#    position?
+#    title
+#    link
+#    snippet
+#    date - optional
+#
+    json4 = '],  "related_searches": [ '
+#
+#    query
+#    link
+#
+    json5 = ']}'
 
-    # "related_questions": []
-
-    # "related_searches": [ ]
-      if (relatedSearches):
-        for x in range(len(relatedSearches)):
-          query = relatedSearches[x].text
-          link = relatedSearches[x]["href"]
-          data1["related_searches"].append({ "query": query, "link": link })
-
-      if (verbose > 6):
-        print("returned data1 out:")
-        print(data1)
-
-    return(jsonify(data1))
+    return (html) # show URLs 
     #return ('{"message": "ERROR: not yet supported"}')
 
 
