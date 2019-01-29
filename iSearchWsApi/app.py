@@ -6,7 +6,7 @@ from iSearchWsApi.blueprints.api.raw import raw
 from iSearchWsApi.blueprints.api.search import search
 from iSearchWsApi.blueprints.api.api import api
 #from snakeeyes.extensions import debug_toolbar, mail, csrf
-from iSearchWsApi.extensions import csrf
+#from iSearchWsApi.extensions import csrf
 
 def create_app(settings_override=None):
     """
@@ -41,7 +41,7 @@ def extensions(app):
     """
 #    debug_toolbar.init_app(app)
 #    mail.init_app(app)
-    csrf.init_app(app)
+#    csrf.init_app(app)
 
     return None
 
