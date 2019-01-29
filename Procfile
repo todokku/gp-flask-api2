@@ -1,1 +1,1 @@
-web: gunicorn --check-config 'iSearchWsApi.app:create_app()'
+web: gunicorn --log-level=DEBUG 'iSearchWsApi.app:create_app()'
