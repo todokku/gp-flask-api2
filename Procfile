@@ -1,1 +1,1 @@
-web: gunicorn 'iSearchWsApi.app:create_app()'
+web: gunicorn --check-config 'iSearchWsApi.app:create_app()'
