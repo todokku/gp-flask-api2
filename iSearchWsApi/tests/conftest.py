@@ -36,3 +36,27 @@ def client(app):
     :return: Flask app client
     """
     yield app.test_client()
+
+# http://pythontesting.net/framework/pytest/pytest-run-tests-using-particular-fixture/
+#conftest.py
+
+def pytest_collection_modifyitems(items, config):
+    fixture_name = config.option.usesfixture
+    if fixture_name is not None:
+        selected_items = []
+        deselected_items = []
+
+        for item in items:
+            if fixture_name in getattr(item, 'fixturenames', ()):
+                selected_items.append(item)
+            else:
+                deselected_items.append(item)
+        config.hook.pytest_deselected(items=deselected_items)
+        items[:] = selected_items
+
+def pytest_addoption(parser):
+    parser.addoption("--usesfixture",
+                     action="store",
+                     default=None,
+                     help="just run tests that use a particular fixture")
+
