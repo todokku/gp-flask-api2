@@ -10,6 +10,7 @@ from iSearchWsApi.blueprints import mockdata
 def live():
 	return 'live'
 
+@pytest.fixture
 def mock():
 	return 'mock'
 
@@ -69,12 +70,13 @@ def test_google_search_live_oneoff(client, query, message, count, live):
 
 @pytest.mark.parametrize(('query', 'message'), (
     #('cats', '{"message": "mocked"}'),
-    ('cats', mockdata.mockDataCats),
+    ('cats', mockdata.mockDataCatsHtml),
     #('cars', '{"message": "mocked"}'),
-    ('cars', mockdata.mockDataCars),
+    ('cars', mockdata.mockDataCarsHtml),
     #('kittens', b'{"message": "mocked"}'),
-    ('kittens', mockdata.mockDataKittens),
-    ('other', {"message": "mocked"}),
+    ('kittens', mockdata.mockDataKittensHtml),
+    #('other', {"message": "mocked"}),
+    ('other', mockdata.mockDataHtml),
 ))
 
 def test_google_search_mock(client, query, message, mock):
@@ -82,7 +84,11 @@ def test_google_search_mock(client, query, message, mock):
         '/search/google?q='+query+'&mock=1'
     )
 
-    mockResponse = json.loads(response.data.decode('utf-8'))
+    #mockResponse = json.loads(response.data.decode('utf-8'))
+    #mockResponse = response.data.decode('utf-8')
+    mockResponse = response.data
+    #print(mockResponse)
+
     #dicMessage = json.load(message)
 
     #assert message in response.data
@@ -115,6 +121,19 @@ def test_ddg_search_live(client, query, message, live):
     assert message in response.data
 
 
+@pytest.mark.parametrize(('query', 'message'), (
+    ('cats', b'{"message": "ERROR: not yet supported"}'),
+    ('cars', b'{"message": "ERROR: not yet supported"}'),
+    ('kittens', b'{"message": "ERROR: not yet supported"}'),
+))
+
+def test_ddg_search_mock(client, query, message, mock):
+    response = client.get(
+        '/search/ddg?q='+query+'&mock=1'
+    )
+    assert message in response.data
+
+
 
 # --- Bing search API testing
 @pytest.mark.parametrize(('query', 'message'), (
@@ -126,6 +145,19 @@ def test_ddg_search_live(client, query, message, live):
 def test_bing_search_live(client, query, message, live):
     response = client.get(
         '/search/bing?q='+query
+    )
+    assert message in response.data
+
+
+@pytest.mark.parametrize(('query', 'message'), (
+    ('cats', b'{"message": "ERROR: not yet supported"}'),
+    ('cars', b'{"message": "ERROR: not yet supported"}'),
+    ('kittens', b'{"message": "ERROR: not yet supported"}'),
+))
+
+def test_bing_search_mock(client, query, message, mock):
+    response = client.get(
+        '/search/bing?q='+query+'&mock=1'
     )
     assert message in response.data
 

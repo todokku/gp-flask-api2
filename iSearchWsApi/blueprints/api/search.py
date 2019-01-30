@@ -41,24 +41,32 @@ def google():
     # https://automatetheboringstuff.com/chapter11/
     q = request.args.get('q') # not requests
     mock = request.args.get('mock') # not requests
+    blocked = request.args.get('blocked') # not requests
     print("q = "+q)
     if (mock):
       print("mock = "+mock)
+    if (blocked):
+      print("blocked = "+blocked)
+      return ('{"message": "ERROR: we have been BLOCKED"}')
+
     print('Googling...') # display text while downloading the Google page
 
+    ### FIXME should return html from parseJsonResults() and be sent GS html data
     if (mock):
       if (q == 'kittens'):
         #return(jsonify(mockdata.mockDataKittens))
         #return(parseJsonResults(json.loads(mockdata.mockDataKittens)))
-        return(parseJsonResults(mockdata.mockDataKittensHtml, q))
+        #return(parseJsonResults(mockdata.mockDataKittensHtml, q))
+        return(mockdata.mockDataKittensHtml)
       elif (q == 'cats'):
         #return(jsonify(mockdata.mockDataCats))
-        return(parseJsonResults(mockdata.mockDataCatsHtml, q))
+        return(mockdata.mockDataCatsHtml)
       elif (q == 'cars'):
         #return(jsonify(mockdata.mockDataCars))
-        return(parseJsonResults(mockdata.mockDataCarsHtml, q))
+        return(mockdata.mockDataCarsHtml)
       else:
-        return ('{"message": "mocked"}')
+        #return ('{"message": "mocked"}')
+        return (mockdata.mockDataHtml)
     #if (mock == 0):
     #else:
     #res = requests.get('http://google.com/search?q=' + q)
@@ -138,9 +146,9 @@ def parseJsonResults(dicResults, q):
 #    for x in range(len(resultStats)):
 #        html=html+"<p>"+str(resultStats[x])+"<br>"
     #for x in range(len(total_results)):
-    html=html+"<p>"+total_results+"<br>"
+    html=html+"<p>"+str(total_results)+"<br>"
     if (verbose > 5):
-        print ("<p>"+total_results+"<br>")
+        print ("<p>"+str(total_results)+"<br>")
     html=html+"<h2>Related Searches</h2>"
     for x in range(len(relatedSearches)):
         html=html+str(relatedSearches[x])+"<br><br>"
@@ -164,7 +172,7 @@ def parseJsonResults(dicResults, q):
     # then gen JSON
 
     json1 = '{ "search_parameters": { "q": "'+q
-    json2 = '"}, "search_information": { "total_results": '+total_results[0]
+    json2 = '"}, "search_information": { "total_results": '+str(total_results)
     json3 = '},"related_questions": [],"organic_results": ['
 #
 #    position?
@@ -180,6 +188,8 @@ def parseJsonResults(dicResults, q):
 #
     json5 = ']}'
 
+    print('html returned:')
+    print(html)
     return (html) # show URLs 
     #return ('{"message": "ERROR: not yet supported"}')
 
