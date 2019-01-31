@@ -60,3 +60,11 @@ def pytest_addoption(parser):
                      default=None,
                      help="just run tests that use a particular fixture")
 
+@pytest.fixture
+def live():
+	return 'live'
+
+@pytest.fixture
+def mock():
+	return 'mock'
+

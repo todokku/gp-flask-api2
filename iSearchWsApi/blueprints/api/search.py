@@ -146,7 +146,7 @@ def parseJsonResults(dicResults, q):
 #    for x in range(len(resultStats)):
 #        html=html+"<p>"+str(resultStats[x])+"<br>"
     #for x in range(len(total_results)):
-    html=html+"<p>"+str(total_results)+"<br>"
+    html=html+"<p> Total Results: "+str(total_results)+"<br>"
     if (verbose > 5):
         print ("<p>"+str(total_results)+"<br>")
     html=html+"<h2>Related Searches</h2>"

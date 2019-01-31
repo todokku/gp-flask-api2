@@ -6,13 +6,6 @@ from iSearchWsApi.blueprints import mockdata
 #print(mockdata.mockDataKittens)
 #print(mockdata.mockDataCats)
 #print(mockdata.mockDataCars)
-@pytest.fixture
-def live():
-	return 'live'
-
-@pytest.fixture
-def mock():
-	return 'mock'
 
 class TestSearch(object):
     def test_google_api(self, client, live):
@@ -36,27 +29,40 @@ class TestSearch(object):
         assert response.status_code == 200
 
 # --- Google search API testing
-@pytest.mark.parametrize(('query', 'message', 'count'), (
-    ('cats', b'{"message": "ERROR: not yet supported"}', 10),
-    #('cars', b'{"message": "ERROR: not yet supported"}', 13),
-    ('kittens', b'{"message": "ERROR: not yet supported"}', 10),
-    #('blocked', {"message": "blocked"}, 0),
-))
+@pytest.mark.parametrize(('query', 'count'), [
+    ('cats', 6),
+    ('cars', 6),
+    ('kittens', 6),
+    #('blocked', 0),
+    ], ids=[
+        'cats',
+        'cars',
+        'kittens',
+    ]
+)
 
-def test_google_search_live(client, query, message, count, live):
+# data returned from /search/Google is HTML
+# data returned from Google Search is too variable for ==
+def test_google_search_live(client, query, count, live):
     response = client.get(
         '/search/google?q='+query
     )
 
-    dic = json.loads(response.data)
-    assert query in dic['search_parameters']['q']
-    assert count == len(dic['organic_results'])
+    #dic = json.loads(response.data)
 
-@pytest.mark.parametrize(('query', 'message', 'count'), (
+    #assert query in dic['search_parameters']['q']
+    #assert count <= len(dic['organic_results'])
+    assert b'Total Results' in response.data
+
+@pytest.mark.parametrize(('query', 'message', 'count'), [
     ('cars', b'{"message": "ERROR: not yet supported"}', 13),
-))
+    ], ids=[
+        'cars',
+    ]
+)
 
-def test_google_search_live_oneoff(client, query, message, count, live):
+# data returned from Google Search is too variable
+def NOtest_google_search_live_oneoff(client, query, message, count, live):
     response = client.get(
         '/search/google?q='+query
     )
@@ -68,7 +74,7 @@ def test_google_search_live_oneoff(client, query, message, count, live):
     else:
       assert count == len(dic['organic_results'])
 
-@pytest.mark.parametrize(('query', 'message'), (
+@pytest.mark.parametrize(('query', 'message'), [
     #('cats', '{"message": "mocked"}'),
     ('cats', mockdata.mockDataCatsHtml),
     #('cars', '{"message": "mocked"}'),
@@ -77,7 +83,13 @@ def test_google_search_live_oneoff(client, query, message, count, live):
     ('kittens', mockdata.mockDataKittensHtml),
     #('other', {"message": "mocked"}),
     ('other', mockdata.mockDataHtml),
-))
+    ], ids=[
+        'cats',
+        'cars',
+        'kittens',
+        'other',
+    ]
+)
 
 def test_google_search_mock(client, query, message, mock):
     response = client.get(
@@ -121,11 +133,16 @@ def test_ddg_search_live(client, query, message, live):
     assert message in response.data
 
 
-@pytest.mark.parametrize(('query', 'message'), (
+@pytest.mark.parametrize(('query', 'message'), [
     ('cats', b'{"message": "ERROR: not yet supported"}'),
     ('cars', b'{"message": "ERROR: not yet supported"}'),
     ('kittens', b'{"message": "ERROR: not yet supported"}'),
-))
+    ], ids=[
+        'cats',
+        'cars',
+        'kittens',
+    ]
+)
 
 def test_ddg_search_mock(client, query, message, mock):
     response = client.get(
@@ -149,11 +166,16 @@ def test_bing_search_live(client, query, message, live):
     assert message in response.data
 
 
-@pytest.mark.parametrize(('query', 'message'), (
+@pytest.mark.parametrize(('query', 'message'), [
     ('cats', b'{"message": "ERROR: not yet supported"}'),
     ('cars', b'{"message": "ERROR: not yet supported"}'),
     ('kittens', b'{"message": "ERROR: not yet supported"}'),
-))
+    ], ids=[
+        'cats',
+        'cars',
+        'kittens',
+    ]
+)
 
 def test_bing_search_mock(client, query, message, mock):
     response = client.get(

@@ -4,7 +4,7 @@
 
 Google Proxy Flask API using Python, Response and BeautifulSoup
 
-I originally tried to "port" Googler to an API but found it much easier to do the web scraping myself.  Still need to add a lot of functionality (see ToDo below).
+I originally tried to "port" Googler to an API but found it much easier to do the web scraping myself.  Still need to add a lot of functionality (see ToDo list below).
 
 This proxy also displays web and raw web output (for debug)
 
@@ -12,11 +12,11 @@ with Flask, Redis, and Docker.
 
 - Using Docker to "Dockerize" a multi-service Flask app
 - Flask blueprints
-- Testing and analyzing your code base
+- Testing and analyzing your code base (both mocked and live)
 - Creating a full blown user management system
 - Creating a custom admin dashboard
 - Logging, middleware and error handling
-- Responding with JSON from Flask and creating AJAX requests
+- Responding with JSON from Flask and creating API requests
 
 ## Python Dev setup
 
@@ -46,16 +46,24 @@ C:\Users\x\Documents\GitHub\gp-flask-api2>workon api2
 (api2) C:\Users\x\Documents\GitHub\gp-flask-api2>python isearch-ws-api/app.py
 ```
 
-### Unit and API testing (including mock API testing)
+### Unit and API testing (including live and mock API testing)
 
 ```
-(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>pytest -v
+(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>pytest -v iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture live iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v --tb=no --usesfixture live iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture mock iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture live mock iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v --tb=no --usesfixture live mock iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture live iSearchWsApi/tests/api/test_search.py
+(api2) C:\GitHub\gp-flask-api2>pytest -v --tb=no --usesfixture live iSearchWsApi/tests/api/test_search.py
+(api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture mock iSearchWsApi/tests/api/test_search.py
 ```
 
 ### Unit and API testing coverage
 
 ```
-(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>pytest --cov=isearch-ws-api .
+(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>pytest --cov=iSearchWsApi iSearchWsApi
 (api2) C:\Users\x\Documents\GitHub\gp-flask-api2>coverage html
 ```
 
@@ -85,12 +93,47 @@ or with cURL:
 curl http:///127.0.0.1:5000/api/google?q=malpractice
 ```
 
+## gunicorn local with CygWin
+### virtualenv in CygWin
+```
+python3 /cygdrive/c/Users/dbadmin/AppData/Local/Programs/Python/Python37/Lib/site-packages/virtualenv.py .
+
+source bin/activate
+
+pip install -r requirements.txt
+
+```
+
+```
+$ gunicorn 'iSearchWsApi.app:create_app()'
+[2019-01-28 14:53:03 -0500] [16856] [INFO] Starting gunicorn 19.9.0
+[2019-01-28 14:53:03 -0500] [16856] [INFO] Listening at: http://127.0.0.1:8000 (16856)
+[2019-01-28 14:53:03 -0500] [16856] [INFO] Using worker: sync
+[2019-01-28 14:53:03 -0500] [15976] [INFO] Booting worker with pid: 15976
+/cygdrive/c/Users/dbadmin/Documents/GitHub/gp-flask-api2/lib/python3.6/site-packages/flask/sessions.py:208: UserWarning: "localhost" is not a valid cookie domain, it must contain a ".". Add an entry to your hosts file, for example "localhost.localdomain", and use that instead.
+  ' "{rv}.localdomain", and use that instead.'.format(rv=rv)
+[2019-01-28 14:54:13 -0500] [16856] [CRITICAL] WORKER TIMEOUT (pid:15976)
+[2019-01-28 14:54:13 -0500] [15976] [INFO] Worker exiting (pid: 15976)
+[2019-01-28 14:54:13 -0500] [2736] [INFO] Booting worker with pid: 2736
+[2019-01-28 14:54:29 -0500] [16856] [INFO] Handling signal: winch
+```
+
+--check-config appears to fail
+
+```
+$ gunicorn --log-level=DEBUG 'iSearchWsApi.app:create_app()'
+```
+
+```
+$ gunicorn --log-level=DEBUG --spew 'iSearchWsApi.app:create_app()'
+```
+
 ## Advanced Topics (ToDo)
 
-- [ ] CI Testing
+- [ ] Continous Integration Testing
 - [x] ~~API Testing~~
 - [x] ~~Handling Scraping Errors~~
-- [ ] Handling Network Errors
+- [x] ~~Handling Network Errors~~
 
 ### Scraper stuff
 - [ ] Sessions and Cookies

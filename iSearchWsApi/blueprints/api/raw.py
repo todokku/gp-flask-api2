@@ -30,14 +30,16 @@ def googleRaw():
 
     if (mock):
       if (q == 'kittens'):
-        return(jsonify(mockdata.mockDataKittensHtml))
+        #return(jsonify(mockdata.mockDataKittensHtml))
+        return(mockdata.mockDataKittensHtml)
         #return (mockData)
       elif (q == 'cats'):
-        return(jsonify(mockdata.mockDataCatsHtml))
+        return(mockdata.mockDataCatsHtml)
       elif (q == 'cars'):
-        return(jsonify(mockdata.mockDataCarsHtml))
+        return(mockdata.mockDataCarsHtml)
       else:
-        return ('{"message": "mocked"}')
+        #return ('{"message": "mocked"}')
+        return(mockdata.mockDataHtml)
     #if (mock == 0):
     if (q == '500'):
       # 503 Server Error: Service Unavailable for url: https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dblocked%26oq%3Dblocked%26hl%3Den%26gl%3Dus%26sourceid%3Dchrome%26ie%3DUTF-8&hl=en&q=EgQyTvRhGNG5mOIFIhkA8aeDS7SXjlGndA50dtMVc_Y3HaUq6drtMgFy
