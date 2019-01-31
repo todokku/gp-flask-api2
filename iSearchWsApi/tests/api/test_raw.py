@@ -8,43 +8,51 @@ from iSearchWsApi.blueprints import mockdata
 #print(mockdata.mockDataCars)
 
 class TestRaw(object):
-    def test_google_raw(self, client):
+    def test_google_raw(self, client, live):
         """ google raw should respond with a success 200. """
         response = client.get(url_for('raw.googleRaw')+'?q=test')
         assert response.status_code == 200
 
-    def test_ddg_raw(self, client):
+    def test_ddg_raw(self, client, live):
         """ ddg api should respond with a success 200. """
         response = client.get(url_for('raw.ddgRaw'))
         assert response.status_code == 200
 
-    def test_bing_raw(self, client):
+    def test_bing_raw(self, client, live):
         """ bing api should respond with a success 200. """
         response = client.get(url_for('raw.bingRaw'))
         assert response.status_code == 200
 
-    def test_multi_raw(self, client):
+    def test_multi_raw(self, client, live):
         """ multi-engine api should respond with a success 200. """
         response = client.get(url_for('raw.multipleEnginesRaw'))
         assert response.status_code == 200
 
 # --- Google Raw API testing
-@pytest.mark.parametrize(('query', 'message'), (
+@pytest.mark.parametrize(('query', 'message'), [
     #('cats', '{"message": "mocked"}'),
     ('cats', mockdata.mockDataCatsHtml),
     #('cars', '{"message": "mocked"}'),
     ('cars', mockdata.mockDataCarsHtml),
     #('kittens', b'{"message": "mocked"}'),
     ('kittens', mockdata.mockDataKittensHtml),
-    ('other', {"message": "mocked"}),
-))
+    #('other', {"message": "mocked"}),
+    ('other', mockdata.mockDataHtml),
+        ], ids=[
+        'cats',
+        'cars',
+        'kittens',
+        'other',
+    ]
+)
 
-def test_google_raw_mock(client, query, message):
+def test_google_raw_mock(client, query, message, mock):
     response = client.get(
         '/raw/google?q='+query+'&mock=1'
     )
 
-    mockResponse = json.loads(response.data.decode('utf-8'))
+    #mockResponse = json.loads(response.data.decode('utf-8'))
+    mockResponse = response.data
     #dicMessage = json.load(message)
 
     #assert message in response.data
@@ -53,7 +61,7 @@ def test_google_raw_mock(client, query, message):
     assert message == mockResponse
     #assert message == response.data
 
-def test_google_raw_blockedk(client):
+def test_google_raw_blocked(client, mock):
     response = client.get(
         '/raw/google?q='+'blocked'+'&blocked=1'
     )
@@ -71,9 +79,9 @@ def test_google_raw_blockedk(client):
     ('kittens', b'{"message": "ERROR: not yet supported"}'),
 ))
 
-def test_ddg_raw_mock(client, query, message):
+def test_ddg_raw_mock(client, query, message, mock):
     response = client.get(
-        '/raw/ddg?q='+query
+        '/raw/ddg?q='+query+'&mock=1'
     )
     assert message in response.data
 
@@ -86,9 +94,9 @@ def test_ddg_raw_mock(client, query, message):
     ('kittens', b'{"message": "ERROR: not yet supported"}'),
 ))
 
-def test_bing_raw_mock(client, query, message):
+def test_bing_raw_mock(client, query, message, mock):
     response = client.get(
-        '/raw/bing?q='+query
+        '/raw/bing?q='+query+'&mock=1'
     )
     assert message in response.data
 
@@ -100,9 +108,9 @@ def test_bing_raw_mock(client, query, message):
     ('kittens', b'{"message": "ERROR: not yet supported"}'),
 ))
 
-def test_multi_raw_mock(client, query, message):
+def test_multi_raw_mock(client, query, message, mock):
     response = client.get(
-        '/raw/multi?q='+query
+        '/raw/multi?q='+query+'&mock=1'
     )
     assert message in response.data
 
