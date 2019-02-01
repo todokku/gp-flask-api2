@@ -25,6 +25,10 @@ npm-debug.log
 pip-log.txt
 pip-delete-this-directory.txt
 
+# config
+instance/
+#config/setting_production.py
+
 # Unit test / coverage reports
 .coverage
 .cache
@@ -54,3 +58,5 @@ tmtags
 # App ignores.
 celerybeat*
 instance/settings.py
+*.production_example
+instance/settings.py.production_example
