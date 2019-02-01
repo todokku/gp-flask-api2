@@ -16,7 +16,7 @@ def app():
         'WTF_CSRF_ENABLED': False
     }
 
-    _app = create_app(settings_override=params)
+    _app = create_app('config.settings_test')
 
     # Establish an application context before running the tests.
     ctx = _app.app_context()

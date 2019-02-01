@@ -2,6 +2,8 @@
 #from config.settings import *
 #from settings import *
 
+# does gunicorn use TESTING and DEVELOPMENT?  It sure looks like it.
+
 # flask core settings
 DEBUG = False
 TESTING = False

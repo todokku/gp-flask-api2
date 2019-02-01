@@ -20,6 +20,7 @@ def create_app(config_pyfile=None):
     #app = Flask(__name__, instance_relative_config=True)
     app = Flask(__name__)
 
+    # only support config/settings files for config
     #app.config.from_object('config.settings')
     app.config.from_object(config_pyfile)
     #app.config.from_pyfile('settings.py', silent=True)
