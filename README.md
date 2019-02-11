@@ -121,11 +121,11 @@ $ gunicorn 'iSearchWsApi.app:create_app()'
 --check-config appears to fail
 
 ```
-$ gunicorn --log-level=DEBUG 'iSearchWsApi.app:create_app()'
+$ gunicorn --log-level=DEBUG 'iSearchWsApi.app:create_app("config.settings_production")'
 ```
 
 ```
-$ gunicorn --log-level=DEBUG --spew 'iSearchWsApi.app:create_app()'
+$ gunicorn --log-level=DEBUG --spew 'iSearchWsApi.app:create_app("config.settings_production")'
 ```
 
 ## Advanced Topics (ToDo)
