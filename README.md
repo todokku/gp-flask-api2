@@ -43,7 +43,7 @@ C:\Users\x\Documents\GitHub\gp-flask-api2>workon api2
 ### run the Flask app
 
 ```
-(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>python isearch-ws-api/app.py
+(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>python iSearchWsApi/app.py
 ```
 
 ### Unit and API testing (including live and mock API testing)
