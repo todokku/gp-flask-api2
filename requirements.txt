@@ -1,7 +1,9 @@
 amqp==2.4.0
+appdirs==1.4.3
 attrs==18.2.0
 beautifulsoup4==4.7.1
 billiard==3.5.0.5
+black==18.9b0
 blinker==1.4
 bs4==0.0.1
 celery==4.1.1
@@ -39,6 +41,7 @@ six==1.12.0
 soupsieve==1.7.2
 SQLAlchemy==1.2.16
 SQLAlchemy-Utils==0.33.11
+toml==0.10.0
 urllib3==1.24.1
 validators==0.12.4
 vine==1.2.0
