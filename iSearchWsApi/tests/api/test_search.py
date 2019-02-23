@@ -41,7 +41,6 @@ class TestSearch(object):
     ],
     ids=["cats", "cars", "kittens"],
 )
-
 # data returned from /search/Google is HTML
 # data returned from Google Search is too variable for ==
 def test_google_search_live(client, query, count, live):
@@ -59,7 +58,6 @@ def test_google_search_live(client, query, count, live):
     [("cars", b'{"message": "ERROR: not yet supported"}', 13)],
     ids=["cars"],
 )
-
 # data returned from Google Search is too variable
 def NOtest_google_search_live_oneoff(client, query, message, count, live):
     response = client.get("/search/google?q=" + query)

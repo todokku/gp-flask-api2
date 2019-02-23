@@ -1,5 +1,5 @@
-import requests, sys, webbrowser, copy, json
-from flask import Blueprint, request, jsonify
+import requests
+from flask import Blueprint, request
 from iSearchWsApi.blueprints import mockdata
 
 raw = Blueprint("raw", __name__, url_prefix="/raw")
@@ -43,10 +43,18 @@ def googleRaw():
             return mockdata.mockDataHtml
     # if (mock == 0):
     if q == "500":
-        # 503 Server Error: Service Unavailable for url: https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dblocked%26oq%3Dblocked%26hl%3Den%26gl%3Dus%26sourceid%3Dchrome%26ie%3DUTF-8&hl=en&q=EgQyTvRhGNG5mOIFIhkA8aeDS7SXjlGndA50dtMVc_Y3HaUq6drtMgFy
+        # 503 Server Error: Service Unavailable for url:
+        #   https://www.google.com/sorry/index?continue=
+        #   https://www.google.com/search%3Fq%3Dblocked%26oq%3D
+        #   blocked%26hl%3Den%26gl%3Dus%26sourceid%3D
+        #   chrome%26ie%3DUTF-8&hl=en&
+        #   q=EgQyTvRhGNG5mOIFIhkA8aeDS7SXjlGndA50dtMVc_Y3HaUq6drtMgFy
         # res = requests.get('https://google.com/search?q=internal%20error&q=EgQyTvRhGN&usasourc=chrome&ved=xUTF-8')
         res = requests.get(
-            "https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dblocked%26oq%3Dblocked%26hl%3Den%26gl%3Dus%26sourceid%3Dchrome%26ie%3DUTF-8&hl=en"
+            "https://www.google.com/sorry/index?continue="
+            "https://www.google.com/search%3Fq%3Dblocked%26"
+            "oq%3Dblocked%26hl%3Den%26gl%3Dus%26sourceid%3D"
+            "chrome%26ie%3DUTF-8&hl=en"
         )
     elif q == "400":
         res = requests.get(

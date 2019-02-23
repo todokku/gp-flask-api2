@@ -10,7 +10,7 @@ def app():
 
     :return: Flask app
     """
-    params = {"DEBUG": False, "TESTING": True, "WTF_CSRF_ENABLED": False}
+    # params = {"DEBUG": False, "TESTING": True, "WTF_CSRF_ENABLED": False}
 
     _app = create_app("config.settings_test")
 

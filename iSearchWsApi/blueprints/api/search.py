@@ -1,5 +1,5 @@
-from flask import Blueprint, request, jsonify
-import requests, sys, webbrowser, copy, json
+from flask import Blueprint, request
+import requests
 from bs4 import BeautifulSoup
 
 from iSearchWsApi.blueprints import mockdata
@@ -51,7 +51,7 @@ def google():
 
     print("Googling...")  # display text while downloading the Google page
 
-    ### FIXME should return html from parseJsonResults() and be sent GS html data
+    # FIXME should return html from parseJsonResults() and be sent GS html data
     if mock:
         if q == "kittens":
             # return(jsonify(mockdata.mockDataKittens))
@@ -186,9 +186,9 @@ def parseJsonResults(dicResults, q):
 
     # then gen JSON
 
-    json1 = '{ "search_parameters": { "q": "' + q
-    json2 = '"}, "search_information": { "total_results": ' + str(total_results)
-    json3 = '},"related_questions": [],"organic_results": ['
+    # json1 = '{ "search_parameters": { "q": "' + q
+    # json2 = '"}, "search_information": { "total_results": ' + str(total_results)
+    # json3 = '},"related_questions": [],"organic_results": ['
     #
     #    position?
     #    title
@@ -196,12 +196,12 @@ def parseJsonResults(dicResults, q):
     #    snippet
     #    date - optional
     #
-    json4 = '],  "related_searches": [ '
+    # json4 = '],  "related_searches": [ '
     #
     #    query
     #    link
     #
-    json5 = "]}"
+    # json5 = "]}"
 
     print("html returned:")
     print(html)

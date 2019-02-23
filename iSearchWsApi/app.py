@@ -10,6 +10,7 @@ from iSearchWsApi.blueprints.api.api import api
 # from iSearchWsApi.extensions import debug_toolbar, csrf
 from iSearchWsApi.extensions import csrf
 
+
 # application factory, see: http://flask.pocoo.org/docs/patterns/appfactories/
 # def create_app(settings_override=None):
 def create_app(config_pyfile=None):
