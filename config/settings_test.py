@@ -6,7 +6,7 @@ DEBUG = False
 TESTING = True
 DEVELOPMENT = True
 #SERVER_NAME = '127.0.0.1:5000'    # gives cookie error
-SERVER_NAME = 'localhost.dev:5000'    # required for pytest
+SERVER_NAME = 'localhost.dev:6001'    # required for pytest
 SECRET_KEY = 'insecurekeyfordev'  # required for csrf
 
 # flask wtf settings

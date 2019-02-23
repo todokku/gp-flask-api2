@@ -72,25 +72,25 @@ Then browse to htmlcov/index.html
 ## Endpoints to test
 
 Show response as web page (Raw HTML - what Google returns)
-http://localhost:5000/raw/google?q=malpractice
+http://localhost.dev:6000/raw/google?q=malpractice
 
 Show response as web page (from parsed response data)
-http://localhost:5000/search/google?q=malpractice
+http://localhost.dev:6000/search/google?q=malpractice
 
 Send response as JSON (for API)
-http://localhost:5000/api/google?q=malpractice
+http://localhost.dev:6000/api/google?q=malpractice
 
 This can also be done interactivaly with Python on the command line:
 ```
 (hello) C:\Users\x\Documents\GitHub\gp-flask>python
 
 >>> import requests
->>> response = requests.get("http://127.0.0.1:5000/api/google?q=malpractice")
+>>> response = requests.get("http://127.0.0.1:6000/api/google?q=malpractice")
 >>> response.json()
 ```
 or with cURL:
 ```
-curl http:///127.0.0.1:5000/api/google?q=malpractice
+curl http:///127.0.0.1:6000/api/google?q=malpractice
 ```
 
 ## gunicorn local with CygWin
@@ -153,5 +153,7 @@ $ gunicorn --log-level=DEBUG --spew 'iSearchWsApi.app:create_app("config.setting
 http://timmyreilly.azurewebsites.net/python-pip-virtualenv-installation-on-windows/
 
 https://blog.hartleybrody.com/web-scraping-cheat-sheet/
+
+https://realpython.com/vim-and-python-a-match-made-in-heaven/#syntax-checkinghighlighting
 
 
