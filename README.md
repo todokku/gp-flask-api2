@@ -2,6 +2,8 @@
 
 ## iSearch Web Scraper & API v2.0.0
 
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/mkobar/gp-serp-url.svg?columns=all)](https://waffle.io/mkobar/gp-serp-url)
+
 Google Proxy Flask API using Python, Response and BeautifulSoup
 
 I originally tried to "port" Googler to an API but found it much easier to do the web scraping myself.  Still need to add a lot of functionality (see ToDo list below).
@@ -134,6 +136,9 @@ $ gunicorn --log-level=DEBUG --spew 'iSearchWsApi.app:create_app("config.setting
 - [x] ~~API Testing~~
 - [x] ~~Handling Scraping Errors~~
 - [x] ~~Handling Network Errors~~
+- [x] ~~Flask8 Linting~~
+- [x] ~~Black code formatting~~
+- [ ] Bandit code security scanning
 
 ### Scraper stuff
 - [ ] Sessions and Cookies
@@ -156,4 +161,5 @@ https://blog.hartleybrody.com/web-scraping-cheat-sheet/
 
 https://realpython.com/vim-and-python-a-match-made-in-heaven/#syntax-checkinghighlighting
 
+More here: [Iterative Search](http://iterativesearch.com)
 
