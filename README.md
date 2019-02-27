@@ -3,6 +3,7 @@
 ## iSearch Web Scraper & API v2.0.0
 
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/mkobar/gp-serp-url.svg?columns=all)](https://waffle.io/mkobar/gp-serp-url)
+[![Known Vulnerabilities](https://snyk.io/test/github/mkobar/gp-flask-api2/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/mkobar/gp-flask-api2?targetFile=requirements.txt)
 
 Google Proxy Flask API using Python, Response and BeautifulSoup
 
