@@ -140,6 +140,10 @@ $ gunicorn --log-level=DEBUG --spew 'iSearchWsApi.app:create_app("config.setting
 - [x] ~~Black code formatting~~
 - [ ] Bandit code security scanning
 
+## Cache stuff
+- [ ] Cache support (in PostgreSQL)
+- [ ] Redis support?
+
 ### Scraper stuff
 - [ ] Sessions and Cookies
 - [ ] Delays and Backing Off
