@@ -8,7 +8,8 @@
 ![Linted](https://img.shields.io/badge/linted-Flake8-orange.svg)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/mkobar/gp-serp-url.svg?columns=all)](https://waffle.io/mkobar/gp-serp-url)
 [![Known Vulnerabilities](https://snyk.io/test/github/mkobar/gp-flask-api2/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/mkobar/gp-flask-api2?targetFile=requirements.txt)
-![Security Scanner](https://img.shields.io/badge/security-scanner-Bandit-blue.svg)
+![Security Scanner](https://img.shields.io/badge/security_scanner-Bandit-blue.svg)
+![Requires.io](https://img.shields.io/requires/github/mkobar/gp-flask-api2.svg)
 ![Website](https://img.shields.io/website-up-down-green-red/https/gp-api2.herokuapp.com%2Fsearch%2Fgoogle%3Fq%3Dcars.svg)
 
 ### Google Proxy Flask API using Python, Response and BeautifulSoup
