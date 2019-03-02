@@ -2,7 +2,7 @@ amqp==2.4.0
 appdirs==1.4.3
 attrs==18.2.0
 beautifulsoup4==4.7.1
-billiard==3.5.0.5
+billiard==3.6.0.0
 black==18.9b0
 blinker==1.4
 bs4==0.0.1
