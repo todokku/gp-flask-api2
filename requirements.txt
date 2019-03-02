@@ -38,7 +38,7 @@ pytz==2018.9
 redis==2.10.6
 requests==2.21.0
 six==1.12.0
-soupsieve==1.7.2
+soupsieve==1.8
 SQLAlchemy==1.2.18
 SQLAlchemy-Utils==0.33.11
 toml==0.10.0
