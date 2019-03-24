@@ -1,17 +1,16 @@
 # gp-flask-api2
 
-## iSearch Web Scraper & API v2.0.0
+## iSearch Web Scraper & API v2.X
 
 [![License](https://img.shields.io/badge/license-COMMERCIAL-red.svg?style=flat-square)](https://github.com/mkobar/gp-flask-api2/blob/master/LICENSE.md)
 ![GitHub release](https://img.shields.io/github/release/mkobar/gp-flask-api2.svg)
-![GitHub tag](https://img.shields.io/github/tag/mkobar/gp-flask-api2.svg)
 ![Code Style](https://img.shields.io/badge/code_style-Black-brightgreen.svg)
 ![Linted](https://img.shields.io/badge/linted-Flake8-orange.svg)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/mkobar/gp-serp-url.svg?columns=all)](https://waffle.io/mkobar/gp-serp-url)
 [![Known Vulnerabilities](https://snyk.io/test/github/mkobar/gp-flask-api2/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/mkobar/gp-flask-api2?targetFile=requirements.txt)
 ![Security Scanner](https://img.shields.io/badge/security_scanner-Bandit-blue.svg)
 ![Requires.io](https://img.shields.io/requires/github/mkobar/gp-flask-api2.svg)
-![Website](https://img.shields.io/website-up-down-green-red/https/gp-api2.herokuapp.com%2Fsearch%2Fgoogle%3Fq%3Dcars.svg)
+![Website](https://img.shields.io/website-up-down-green-red/https/gp-api2.herokuapp.com.svg)
 
 ### Google Proxy Flask API using Python, Response and BeautifulSoup
 
@@ -83,14 +82,17 @@ Then browse to htmlcov/index.html
 
 ## Endpoints to test
 
+Show static web page
+http://localhost:5000/
+
 Show response as web page (Raw HTML - what Google returns)
-http://localhost.dev:5000/raw/google?q=malpractice
+http://localhost:5000/raw/google?q=malpractice
 
 Show response as web page (from parsed response data)
-http://localhost.dev:5000/search/google?q=malpractice
+http://localhost:5000/search/google?q=malpractice
 
 Send response as JSON (for API)
-http://localhost.dev:5000/api/google?q=malpractice
+http://localhost:5000/api/google?q=malpractice
 
 This can also be done interactivaly with Python on the command line:
 ```
@@ -138,6 +140,14 @@ $ gunicorn --log-level=DEBUG 'iSearchWsApi.app:create_app("config.settings_produ
 
 ```
 $ gunicorn --log-level=DEBUG --spew 'iSearchWsApi.app:create_app("config.settings_production")'
+```
+To test CygWin gunicorn:
+```
+http://localhost:8000/search/google?q=car%20seats
+
+or
+
+http://localhost:8000/
 ```
 
 ## Advanced Topics (ToDo)
