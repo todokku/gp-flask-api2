@@ -42,11 +42,11 @@ def google():
     q = request.args.get("q")  # not requests
     mock = request.args.get("mock")  # not requests
     blocked = request.args.get("blocked")  # not requests
-    print("q = " + q)
+    print("q = " + str(q))
     if mock:
-        print("mock = " + mock)
+        print("mock = " + str(mock))
     if blocked:
-        print("blocked = " + blocked)
+        print("blocked = " + str (blocked))
         return '{"message": "ERROR: we have been BLOCKED"}'
 
     print("Googling...")  # display text while downloading the Google page
