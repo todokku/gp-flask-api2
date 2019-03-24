@@ -63,8 +63,9 @@ C:\Users\x\Documents\GitHub\gp-flask-api2>workon api2
 (api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture live iSearchWsApi
 (api2) C:\GitHub\gp-flask-api2>pytest -v --tb=no --usesfixture live iSearchWsApi
 (api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture mock iSearchWsApi
-(api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture live mock iSearchWsApi
-(api2) C:\GitHub\gp-flask-api2>pytest -v --tb=no --usesfixture live mock iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture live iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v --tb=no --usesfixture live iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v --tb=no --usesfixture mock iSearchWsApi
 (api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture live iSearchWsApi/tests/api/test_search.py
 (api2) C:\GitHub\gp-flask-api2>pytest -v --tb=no --usesfixture live iSearchWsApi/tests/api/test_search.py
 (api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture mock iSearchWsApi/tests/api/test_search.py
@@ -82,25 +83,25 @@ Then browse to htmlcov/index.html
 ## Endpoints to test
 
 Show response as web page (Raw HTML - what Google returns)
-http://localhost.dev:6000/raw/google?q=malpractice
+http://localhost.dev:5000/raw/google?q=malpractice
 
 Show response as web page (from parsed response data)
-http://localhost.dev:6000/search/google?q=malpractice
+http://localhost.dev:5000/search/google?q=malpractice
 
 Send response as JSON (for API)
-http://localhost.dev:6000/api/google?q=malpractice
+http://localhost.dev:5000/api/google?q=malpractice
 
 This can also be done interactivaly with Python on the command line:
 ```
 (hello) C:\Users\x\Documents\GitHub\gp-flask>python
 
 >>> import requests
->>> response = requests.get("http://127.0.0.1:6000/api/google?q=malpractice")
+>>> response = requests.get("http://127.0.0.1:5000/api/google?q=malpractice")
 >>> response.json()
 ```
 or with cURL:
 ```
-curl http:///127.0.0.1:6000/api/google?q=malpractice
+curl http:///127.0.0.1:5000/api/google?q=malpractice
 ```
 
 ## gunicorn local with CygWin
