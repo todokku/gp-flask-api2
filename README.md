@@ -3,6 +3,7 @@
 ## iSearch Web Scraper & API v2.0.0
 
 [![License](https://img.shields.io/badge/license-COMMERCIAL-red.svg?style=flat-square)](https://github.com/mkobar/gp-flask-api2/blob/master/LICENSE.md)
+![GitHub release](https://img.shields.io/github/release/mkobar/gp-flask-api2.svg)
 ![GitHub tag](https://img.shields.io/github/tag/mkobar/gp-flask-api2.svg)
 ![Code Style](https://img.shields.io/badge/code_style-Black-brightgreen.svg)
 ![Linted](https://img.shields.io/badge/linted-Flake8-orange.svg)
