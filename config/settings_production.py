@@ -9,7 +9,7 @@ DEBUG = False
 TESTING = False
 
 #SERVER_NAME = 'app.isearch.com'
-#SECRET_KEY = 'generateastrong128chartoken'
+SECRET_KEY = 'generateastrong128chartoken'
 
 DEVELOPMENT = False
 
