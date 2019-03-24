@@ -22,3 +22,7 @@ MAIL_PASSWORD = 'thebestpasswordyouevermade'
 
 CELERY_BROKER_URL = 'redis://:amuchmoresecurepassword@redis:6379/0'
 CELERY_RESULT_BACKEND = 'redis://:amuchmoresecurepassword@redis:6379/0'
+
+# rollbar settings
+ROLLBAR_TOKEN = 'e1d42248ad324665a13b6c7c4085b089'
+ROLLBAR_ENVIRONMENT = 'production'

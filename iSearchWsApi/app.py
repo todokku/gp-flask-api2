@@ -2,6 +2,14 @@ from flask import Flask
 
 # from celery import Celery
 
+## Rollbar init code. You'll need the following to use Rollbar with Flask.
+## This requires the 'blinker' package to be installed
+
+import os
+import rollbar
+import rollbar.contrib.flask
+from flask import got_request_exception
+
 from iSearchWsApi.blueprints.page.views import page
 from iSearchWsApi.blueprints.api.raw import raw
 from iSearchWsApi.blueprints.api.search import search
@@ -9,7 +17,6 @@ from iSearchWsApi.blueprints.api.api import api
 
 # from iSearchWsApi.extensions import debug_toolbar, csrf
 from iSearchWsApi.extensions import csrf
-
 
 # application factory, see: http://flask.pocoo.org/docs/patterns/appfactories/
 # def create_app(settings_override=None):
@@ -35,9 +42,26 @@ def create_app(config_pyfile=None):
 
     # now log config being used
     app.logger.info("Debug status is: " + str(app.config["DEBUG"]))
-    app.logger.info("Testiing status is: " + str(app.config["TESTING"]))
+    app.logger.info("Testing status is: " + str(app.config["TESTING"]))
     app.logger.info("Development status is: " + str(app.config["DEVELOPMENT"]))
     app.logger.info("Server Name is: " + str(app.config["SERVER_NAME"]))
+
+    #@app.before_first_request
+    #def init_rollbar():
+    # init rollbar module
+    rollbar.init(
+        # access token for the app
+        str(app.config["ROLLBAR_TOKEN"]),
+        # environment name
+        str(app.config["ROLLBAR_ENVIRONMENT"]),
+        # server root directory, makes tracebacks prettier
+        root=os.path.dirname(os.path.realpath(__file__)),
+        # flask already sets up logging
+        allow_logging_basic_config=False)
+
+    # send exceptions from `app` to rollbar, using flask's signal system.
+    got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
+    rollbar.report_message('Starting app for flask-api2', 'info')
 
     app.register_blueprint(page)
     app.register_blueprint(raw)

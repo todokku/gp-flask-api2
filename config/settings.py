@@ -8,7 +8,7 @@ DEVELOPMENT = True
 #SERVER_NAME = 'localhost:5000'
 #SERVER_NAME = 'localhost.localdomain:5000'
 #SERVER_NAME = '127.0.0.1:5000'    # gives cookie error
-SERVER_NAME = 'localhost.dev:6000'    # required for pytest
+SERVER_NAME = 'localhost.dev:5000'    # required for pytest
 SECRET_KEY = 'insecurekeyfordev'  # required for csrf
 PERMANENT_SESSION_LIFETIME = 60 * 60 * 24 * 30
 
@@ -44,4 +44,8 @@ PROJECT_SITE_NAME = u'Flask Example'
 PROJECT_SITE_URL = u'http://127.0.0.1:5000'
 PROJECT_SIGNUP_TOKEN_MAX_AGE = 60 * 60 * 24 * 7  # in seconds
 PROJECT_RECOVER_PASSWORD_TOKEN_MAX_AGE = 60 * 60 * 24 * 7  # in seconds
+
+# rollbar settings
+ROLLBAR_TOKEN = 'e1d42248ad324665a13b6c7c4085b089'
+ROLLBAR_ENVIRONMENT = 'development'
 
