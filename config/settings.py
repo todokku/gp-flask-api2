@@ -8,7 +8,7 @@ DEVELOPMENT = True
 #SERVER_NAME = 'localhost:5000'
 #SERVER_NAME = 'localhost.localdomain:5000'
 #SERVER_NAME = '127.0.0.1:5000'    # gives cookie error
-#NOTE: .dev has HSTS set to force https - .devil does not
+# NOTE: .dev has HSTS set to force https - .devil does not
 SERVER_NAME = 'localhost.devil:5000'    # required for pytest
 SECRET_KEY = 'insecurekeyfordev'  # required for csrf
 PERMANENT_SESSION_LIFETIME = 60 * 60 * 24 * 30

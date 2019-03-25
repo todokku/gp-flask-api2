@@ -6,7 +6,8 @@ DEBUG = False
 TESTING = True
 DEVELOPMENT = True
 #SERVER_NAME = '127.0.0.1:5000'    # gives cookie error
-SERVER_NAME = 'localhost.dev:5001'    # required for pytest
+# NOTE: .dev has HSTS set to force https - .devil does not
+SERVER_NAME = 'localhost.devil:5001'    # required for pytest
 SECRET_KEY = 'insecurekeyfordev'  # required for csrf
 
 # flask wtf settings
