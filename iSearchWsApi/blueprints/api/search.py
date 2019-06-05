@@ -223,3 +223,130 @@ def bing():
 # multiple engines
 def multipleEngines():
     return '{"message": "ERROR: not yet supported"}'
+
+@search.route("/serpapi")
+def serpApi():
+    # from
+    # https://automatetheboringstuff.com/chapter11/
+    q = request.args.get("q")  # not requests
+    mock = request.args.get("mock")  # not requests
+    blocked = request.args.get("blocked")  # not requests
+    print("q = " + str(q))
+    if mock:
+        print("mock = " + str(mock))
+    if blocked:
+        print("blocked = " + str (blocked))
+        return '{"message": "ERROR: we have been BLOCKED"}'
+
+    print("SerpApi-ing...")  # display text while downloading the Google page
+
+    # FIXME should return html from parseJsonResults() and be sent GS html data
+    if mock:
+        if q == "kittens":
+            # return(jsonify(mockdata.mockDataKittens))
+            # return(parseJsonResults(json.loads(mockdata.mockDataKittens)))
+            # return(parseJsonResults(mockdata.mockDataKittensHtml, q))
+            return mockdata.mockDataKittensHtml
+        elif q == "cats":
+            # return(jsonify(mockdata.mockDataCats))
+            return mockdata.mockDataCatsHtml
+        elif q == "cars":
+            # return(jsonify(mockdata.mockDataCars))
+            return mockdata.mockDataCarsHtml
+        else:
+            # return ('{"message": "mocked"}')
+            return mockdata.mockDataHtml
+    # if (mock == 0):
+    # else:
+    # res = requests.get('http://google.com/search?q=' + q)
+    # $ curl --get https://serpapi.com/search \
+    # -d q="Coffee" \
+    # -d hl="en" \
+    # -d gl="us" \
+    # -d google_domain="google.com" \
+    # -d api_key="194a4b22789db07b2e0957b87615316d0f0045918a9dd4b5f8e8162b4020da43" 
+    res = requests.get(
+        "https://serpapi.com/search.json?q="
+        + q
+        + "&hl=en&gl=us&google_domain=google.com"
+        + "&api_key=194a4b22789db07b2e0957b87615316d0f0045918a9dd4b5f8e8162b4020da43"
+    )
+    #print(res)
+    #print(*res)
+
+    # res.raise_for_status() # not in production
+    if (res.status_code >= 400) and (res.status_code < 500):
+        """
+      return('<html><head></head><body><h2>Client ERROR Returned '+str(res.status_code)+
+        '</h2><p>'+res.text+'<br></body></html>')
+      """
+        print("Client ERROR Returned " + str(res.status_code))
+        return res.text
+
+    if (res.status_code >= 500) and (res.status_code < 600):
+        """
+      return('<html><head></head><body><h2>Server Error Returned '+str(res.status_code)+
+        '</h2><p>'+res.text+'<br></body></html>')
+      """
+        print("Server ERROR Returned " + str(res.status_code))
+        return res.text
+
+    data = res.json()
+
+    #   print some html reponse information
+    if verbose > 0:
+        print("status = " + str(res.status_code))
+        print(res.headers.get("content-type", "unknown"))
+    
+        total_results = data["search_information"]["total_results"]
+        relatedSearches =  data["related_searches"]
+        linkElems = data["organic_results"]
+
+    # then return HTML
+    html = "<!DOCTYPE doctype html><head></head><body>"
+    #    for x in range(len(resultStats)):
+    #        html=html+"<p>"+str(resultStats[x])+"<br>"
+    # for x in range(len(total_results)):
+    html = html + "<p> Total Results: " + str(total_results) + "<br>"
+    if verbose > 5:
+        print("<p>" + str(total_results) + "<br>")
+    html = html + "<h2>Related Searches</h2>"
+    for x in range(len(relatedSearches)):
+        html = html + str(relatedSearches[x]["query"]) + "<br><br>"
+        if verbose > 5:
+            print(str(relatedSearches[x]) + "<br><br>")
+    html = html + "<h2>Related Questions</h2>"
+
+    html = html + "<h2>Organic Results</h2>"
+    for x in range(len(linkElems)):
+        html = html + str(linkElems[x]["title"]) + "<br>"
+        html = html + str(linkElems[x]["link"]) + "<br>"
+        html = html + str(linkElems[x]["snippet"]) + "<br><br>"
+        if verbose > 5:
+            print("linkElems=" + str(len(linkElems)) + " x=" + str(x) + "\n")
+    html = html + "</body></html>"
+
+    # then gen JSON
+
+    # json1 = '{ "search_parameters": { "q": "' + q
+    # json2 = '"}, "search_information": { "total_results": ' + str(total_results)
+    # json3 = '},"related_questions": [],"organic_results": ['
+    #
+    #    position?
+    #    title
+    #    link
+    #    snippet
+    #    date - optional
+    #
+    # json4 = '],  "related_searches": [ '
+    #
+    #    query
+    #    link
+    #
+    # json5 = "]}"
+
+    print("html returned:")
+    print(html)
+    return html  # show URLs
+    # return ('{"message": "ERROR: not yet supported"}')
+
