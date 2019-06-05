@@ -149,6 +149,19 @@ or
 http://localhost:8000/
 ```
 
+## Flake8 - Linter
+```
+flake8 iSearchWsApi
+```
+
+## Black - reformatter
+```
+black iSearchWsApi
+```
+
+## Bandit - security Linter
+todo
+
 ## Advanced Topics (ToDo)
 
 - [ ] Continous Integration Testing
