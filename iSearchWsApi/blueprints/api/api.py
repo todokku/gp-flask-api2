@@ -143,9 +143,9 @@ def googleApi():
             print(*relatedSearches, sep="\n")
 
     #    print(*resultStats, sep = "\n")
-    #total_results = int(resultStats[0])
+    # total_results = int(resultStats[0])
     total_results = result_count
-    #total_results = 0
+    # total_results = 0
 
     if verbose > 3:
         print("\n\ntotal_results")
@@ -161,7 +161,7 @@ def googleApi():
         print(data1)
 
     data1["search_parameters"]["q"] = q
-    #data1["search_information"]["total_results"] = total_results[0]
+    # data1["search_information"]["total_results"] = total_results[0]
     # "organic_results": []
     for x in range(len(titleElems)):
         position = x
@@ -271,7 +271,7 @@ def serpApi():
         # -d hl="en" \
         # -d gl="us" \
         # -d google_domain="google.com" \
-        # -d api_key="194a4b22789db07b2e0957b87615316d0f0045918a9dd4b5f8e8162b4020da43" 
+        # -d api_key="194a4b22789db07b2e0957b87615316d0f0045918a9dd4b5f8e8162b4020da43"
         res = requests.get(
             "https://serpapi.com/search.json?q="
             + q
@@ -279,10 +279,10 @@ def serpApi():
             + "&api_key=194a4b22789db07b2e0957b87615316d0f0045918a9dd4b5f8e8162b4020da43"
         )
         print(res)
-        #print(*res, sep="\n")
+        # print(*res, sep="\n")
         print(*res)
-        #print(*res.organic_results)
-        #print(*res.related_searches)
+        # print(*res.organic_results)
+        # print(*res.related_searches)
     # res.raise_for_status() # not in production
     if (res.status_code >= 400) and (res.status_code < 500):
         print("Client ERROR Returned " + str(res.status_code))
@@ -305,15 +305,15 @@ def serpApi():
     # Retrieve top search result links.
     data = res.json()
 
-    print (data)
+    print(data)
 
     if data["search_metadata"]:
         print("\n\nsearchMetadata")
         print(data["search_metadata"], sep="\n")
-        
+
         print(data["search_information"])
         print(data["search_information"]["total_results"])
-        #print(data["search_information.total_results"])
+        # print(data["search_information.total_results"])
         result_count = data["search_information"]["total_results"]
 
     if data["organic_results"]:
@@ -321,9 +321,9 @@ def serpApi():
             print("\n\norganicResults")
             print(data["organic_results"], sep="\n")
 
-        #print("\n\nabstractElems")
-        #print(res.organic_results)
-        #print(*abstractElems, sep="\n")
+        # print("\n\nabstractElems")
+        # print(res.organic_results)
+        # print(*abstractElems, sep="\n")
 
     if data["related_searches"]:
         if verbose > 3:
@@ -331,7 +331,7 @@ def serpApi():
             print(data["related_searches"], sep="\n")
 
     #    print(*resultStats, sep = "\n")
-    #total_results = int(resultStats[0])
+    # total_results = int(resultStats[0])
     total_results = result_count
 
     if verbose > 3:
@@ -340,4 +340,3 @@ def serpApi():
 
     return jsonify(data)
     # return ('{"message": "ERROR: not yet supported"}')
-

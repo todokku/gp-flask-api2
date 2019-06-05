@@ -9,7 +9,6 @@ from iSearchWsApi.blueprints import mockdata
 
 
 class TestApiDDG(object):
-
     def test_ddg_api(self, client, live):
         """ ddg api should respond with a success 200. """
         response = client.get(url_for("api.ddgApi"))
@@ -41,5 +40,3 @@ def test_ddg_api_live(client, query, message, live):
 def test_ddg_api_mock(client, query, message, mock):
     response = client.get("/api/ddg?q=" + query + "&mock=1")
     assert message in response.data
-
-

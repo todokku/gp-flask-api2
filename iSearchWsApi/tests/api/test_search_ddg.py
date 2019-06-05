@@ -14,6 +14,7 @@ class TestSearchDDG(object):
         response = client.get(url_for("search.ddg"))
         assert response.status_code == 200
 
+
 # --- DDG search API testing
 @pytest.mark.parametrize(
     ("query", "message"),
@@ -40,4 +41,3 @@ def test_ddg_search_live(client, query, message, live):
 def test_ddg_search_mock(client, query, message, mock):
     response = client.get("/search/ddg?q=" + query + "&mock=1")
     assert message in response.data
-

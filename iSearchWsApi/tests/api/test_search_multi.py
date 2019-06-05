@@ -9,11 +9,11 @@ from iSearchWsApi.blueprints import mockdata
 
 
 class TestSearchMulti(object):
-
     def test_multi_api(self, client, live):
         """ multi-engine api should respond with a success 200. """
         response = client.get(url_for("search.multipleEngines"))
         assert response.status_code == 200
+
 
 # --- Multi search API testing
 @pytest.mark.parametrize(

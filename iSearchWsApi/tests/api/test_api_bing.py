@@ -9,7 +9,6 @@ from iSearchWsApi.blueprints import mockdata
 
 
 class TestApiBing(object):
-
     def test_bing_api(self, client, live):
         """ bing api should respond with a success 200. """
         response = client.get(url_for("api.bingApi"))
@@ -41,5 +40,3 @@ def test_bing_api_live(client, query, message, live):
 def test_bing_api_mock(client, query, message, mock):
     response = client.get("/api/bing?q=" + query + "&mock=1")
     assert message in response.data
-
-

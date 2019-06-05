@@ -46,7 +46,7 @@ def google():
     if mock:
         print("mock = " + str(mock))
     if blocked:
-        print("blocked = " + str (blocked))
+        print("blocked = " + str(blocked))
         return '{"message": "ERROR: we have been BLOCKED"}'
 
     print("Googling...")  # display text while downloading the Google page
@@ -224,6 +224,7 @@ def bing():
 def multipleEngines():
     return '{"message": "ERROR: not yet supported"}'
 
+
 @search.route("/serpapi")
 def serpApi():
     # from
@@ -235,7 +236,7 @@ def serpApi():
     if mock:
         print("mock = " + str(mock))
     if blocked:
-        print("blocked = " + str (blocked))
+        print("blocked = " + str(blocked))
         return '{"message": "ERROR: we have been BLOCKED"}'
 
     print("SerpApi-ing...")  # display text while downloading the Google page
@@ -264,15 +265,15 @@ def serpApi():
     # -d hl="en" \
     # -d gl="us" \
     # -d google_domain="google.com" \
-    # -d api_key="194a4b22789db07b2e0957b87615316d0f0045918a9dd4b5f8e8162b4020da43" 
+    # -d api_key="194a4b22789db07b2e0957b87615316d0f0045918a9dd4b5f8e8162b4020da43"
     res = requests.get(
         "https://serpapi.com/search.json?q="
         + q
         + "&hl=en&gl=us&google_domain=google.com"
         + "&api_key=194a4b22789db07b2e0957b87615316d0f0045918a9dd4b5f8e8162b4020da43"
     )
-    #print(res)
-    #print(*res)
+    # print(res)
+    # print(*res)
 
     # res.raise_for_status() # not in production
     if (res.status_code >= 400) and (res.status_code < 500):
@@ -297,9 +298,9 @@ def serpApi():
     if verbose > 0:
         print("status = " + str(res.status_code))
         print(res.headers.get("content-type", "unknown"))
-    
+
         total_results = data["search_information"]["total_results"]
-        relatedSearches =  data["related_searches"]
+        relatedSearches = data["related_searches"]
         linkElems = data["organic_results"]
 
     # then return HTML
@@ -349,4 +350,3 @@ def serpApi():
     print(html)
     return html  # show URLs
     # return ('{"message": "ERROR: not yet supported"}')
-
