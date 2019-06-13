@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 
 # from celery import Celery
 
@@ -30,6 +31,9 @@ def create_app(config_pyfile=None):
     # app = Flask(__name__, instance_relative_config=True)
     app = Flask(__name__)
 
+    # add global CORS support
+    # https://flask-cors.readthedocs.io/en/latest/
+    CORS(app)
     # only support config/settings files for config
     # app.config.from_object('config.settings')
     app.config.from_object(config_pyfile)
