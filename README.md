@@ -159,8 +159,27 @@ flake8 iSearchWsApi
 black iSearchWsApi
 ```
 
-## Bandit - security Linter
-todo
+## Bandit - source code security analyzer
+
+Run for all issues for entire project
+```
+bandit -r iSearchWsApi
+```
+
+Show only high severity issues for entire project
+```
+bandit -r iSearchWsApi -lll
+```
+
+Show only high severity issues for entire project and included files with score
+```
+bandit -r iSearchWsApi -lll -v
+```
+
+Show only high severity issues for entire project and included files with score and ignore nosec comment action
+```
+bandit -r iSearchWsApi -lll -v --ignore-nosec
+```
 
 ## Advanced Topics (ToDo)
 
@@ -170,7 +189,7 @@ todo
 - [x] ~~Handling Network Errors~~
 - [x] ~~Flask8 Linting~~
 - [x] ~~Black code formatting~~
-- [ ] Bandit code security scanning
+- [X] ~~Bandit code security scanning~~
 
 ## Cache stuff
 - [ ] Cache support (in PostgreSQL)
@@ -198,6 +217,8 @@ https://blog.hartleybrody.com/web-scraping-cheat-sheet/
 https://realpython.com/vim-and-python-a-match-made-in-heaven/#syntax-checkinghighlighting
 
 https://stackoverflow.com/questions/20035101/why-does-my-javascript-get-a-no-access-control-allow-origin-header-is-present
+
+https://pypi.org/project/bandit/
 
 More here: [Iterative Search](http://iterativesearch.com)
 
