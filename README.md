@@ -197,5 +197,7 @@ https://blog.hartleybrody.com/web-scraping-cheat-sheet/
 
 https://realpython.com/vim-and-python-a-match-made-in-heaven/#syntax-checkinghighlighting
 
+https://stackoverflow.com/questions/20035101/why-does-my-javascript-get-a-no-access-control-allow-origin-header-is-present
+
 More here: [Iterative Search](http://iterativesearch.com)
 
