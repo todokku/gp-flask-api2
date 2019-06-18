@@ -94,4 +94,4 @@ def extensions(app):
 # only used if: python iSearchWsApi/app.py
 if __name__ == "__main__":
     app = create_app("config.settings")
-    app.run(debug=True)
+    app.run(debug=True) # nosec - for bandit testing in dev
