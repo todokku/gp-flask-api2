@@ -8,7 +8,7 @@ verbose = 9  # all the debug prints
 
 # headers to use in Get
 headers_Get = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/62.0",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.5",
     "Accept-Encoding": "gzip, deflate",
@@ -62,11 +62,12 @@ def googleRaw():
         )
     else:
         res = requests.get(
-            "https://google.com/search?q="
+            "https://www.google.com/search?q="
             + q
             + "&oq="
             + q
-            + "&hl=en&gl=us&sourceid=chrome&ie=UTF-8"
+            + "&hl=en&gl=us&sourceid=chrome&ie=UTF-8",
+            headers=headers_Get
         )
     # res.raise_for_status()  # not in production
     if (res.status_code >= 400) and (res.status_code < 500):
