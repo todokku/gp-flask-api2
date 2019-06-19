@@ -67,7 +67,7 @@ def googleRaw():
             + "&oq="
             + q
             + "&hl=en&gl=us&sourceid=chrome&ie=UTF-8",
-            headers=headers_Get
+            headers=headers_Get,
         )
     # res.raise_for_status()  # not in production
     if (res.status_code >= 400) and (res.status_code < 500):
