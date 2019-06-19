@@ -1,0 +1,39 @@
+High-performance rate limiting for Flask/Python
+
+
+https://libraries.io/search?keywords=throttle&languages=Python
+
+
+An alternative approach to rate limiting
+https://www.figma.com/blog/an-alternative-approach-to-rate-limiting/
+
+Non-redis (rocksDB) storage used
+https://medium.com/smyte/rate-limiter-df3408325846
+
+lotus_eaters with Redis support
+https://github.com/mpetyx/lotus_eaters
+https://pypi.python.org/pypi/lotus_eaters
+https://apilama.com/2018/05/21/leaky-bucket-algorithm-throttling-apis/
+
+Token Bucket limiter with in-memory storage
+https://github.com/falconry/token-bucket
+https://pypi.org/project/token-bucket/
+
+Rate Limiting Using Redis in Python
+http://bobintornado.github.io/development/2017/05/15/Rate-Limiting-Using-Redis-in-Python.html
+
+Static with no data storage
+https://stackoverflow.com/questions/667508/whats-a-good-rate-limiting-algorithm
+
+API limit without data storage
+https://pypi.org/project/ratelimit/
+
+Rate limiting function calls with Python Decorators
+https://gist.github.com/gregburek/1441055
+
+Flask-Limiter with data storage - redis
+https://flask-limiter.readthedocs.io/en/stable/#rate-limiting-strategies
+https://github.com/alisaifee/flask-limiter
+https://pypi.org/project/Flask-Limiter/
+
+
