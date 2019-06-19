@@ -10,7 +10,7 @@ verbose = 9  # all the debug prints
 
 # headers to use in Get
 headers_Get = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/62.0",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.5",
     "Accept-Encoding": "gzip, deflate",
@@ -71,11 +71,12 @@ def google():
     # else:
     # res = requests.get('http://google.com/search?q=' + q)
     res = requests.get(
-        "https://google.com/search?q="
+        "https://www.google.com/search?q="
         + q
         + "&oq="
         + q
-        + "&hl=en&gl=us&sourceid=chrome&ie=UTF-8"
+        + "&hl=en&gl=us&sourceid=chrome&ie=UTF-8",
+        headers = headers_Get
     )
     # res.raise_for_status() # not in production
     if (res.status_code >= 400) and (res.status_code < 500):
@@ -110,15 +111,49 @@ def parseJsonResults(dicResults, q):
     #   print(soup)
 
     # Open a browser tab for each result.
-    result_count = [0]
+    #result_count = [0]
 
     linkElems = soup.select(".r a")  # osearch links and titles
     abstractElems = soup.select(".st")  # osearch snippets
     relatedSearches = soup.select(".aw5cc a")
     #   relatedQuestions = soup.select('.st span')
-    for resultStats in soup.find_all("div", "sd"):
-        result_count = resultStats.contents
+    #for resultStats in soup.find_all("div", "sd"):
+    #    result_count = soup.select('.resultStats div')
+    #    print("resultStats =", result_count)
     #     print("s")
+    #result_count = soup.select('.resultStats div')
+    #result_count = soup.select('.resultStats')
+    
+    print(".resultStats")
+    for i in soup.select("#resultStats"):
+       print("i.text: ")
+       print(i.text)
+       j = i.text.split()
+       print ("["+j[0]+"]")
+       print (j[1])
+       if (j[0] == "About"):
+           #if ( j[1].isnumeric() ):  has commas
+           if ( j[1][0].isdigit() ):
+               result_count = j[1]
+               if ( j[2] == "Million") or (j[2] == "million") :
+                   result_count += ",000,000"
+               elif ( j[2] == "Thousand") or (j[2] == "thousand"):
+                   result_count += ",000"
+               elif ( j[2] == "Results") or (j[2] == "results"):
+                   result_count += ""
+               else: 
+                   result_count = '-1'
+                   assert "Google sent a new resultStats string"
+           else:
+               result_count = '-2'
+       else:
+           result_count = '-3'
+       print("resultStats =", result_count)
+
+       #for m, k in enumerate(j):
+       #    print ("k = ", k)
+       #    print (j[m])
+    print("resultStats2 =", result_count)
 
     #   for titleElems in soup.find_all("div", "r"):
     titleElems = soup.select(".r a")
@@ -142,7 +177,9 @@ def parseJsonResults(dicResults, q):
 
     #    print(*resultStats, sep = "\n")
     #    total_results = int(resultStats[0])
-    total_results = result_count[0]
+    # total_results = result_count[0]
+    total_results = result_count
+    # total_results = 0
 
     if verbose > 3:
         print("\n\ntotal_results")
