@@ -180,6 +180,8 @@ Show only high severity issues for entire project and included files with score 
 ```
 bandit -r iSearchWsApi -lll -v --ignore-nosec
 ```
+## Update version on home
+Update version in gp-flask-api2\iSearchWsApi\templates\layouts\base.html
 
 ## Advanced Topics (ToDo)
 
