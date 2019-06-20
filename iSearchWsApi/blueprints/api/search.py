@@ -113,9 +113,13 @@ def parseJsonResults(dicResults, q):
     # Open a browser tab for each result.
     # result_count = [0]
 
-    linkElems = soup.select(".r a")  # osearch links and titles
-    abstractElems = soup.select(".st")  # osearch snippets
-    relatedSearches = soup.select(".aw5cc a")
+    #linkElems = soup.select('.r a') # osearch links and titles
+    linkElems = soup.select('div.g div.rc div.r a') # osearch links and titles
+    #abstractElems = soup.select('.st') # osearch snippets
+    abstractElems = soup.select('div.g div.rc div.s div span.st') # osearch snippets
+#    relatedSearches = soup.select('.aw5cc a') changed by google in may 2019
+    relatedSearches = soup.select('p.nVcaUb > a')
+    #pprint(soup.select("p.nVcaUb > a")) # all a tag that inside p
     #   relatedQuestions = soup.select('.st span')
     # for resultStats in soup.find_all("div", "sd"):
     #    result_count = soup.select('.resultStats div')
