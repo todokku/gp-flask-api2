@@ -122,43 +122,43 @@ def googleApi():
     #   print(soup)
 
     # Open a browser tab for each result.
-    #linkElems = soup.select('.r a') # osearch links and titles
-    linkElems = soup.select('div.g div.rc div.r a') # osearch links and titles
-    #abstractElems = soup.select('.st') # osearch snippets
-    abstractElems = soup.select('div.g div.rc div.s div span.st') # osearch snippets
-#    relatedSearches = soup.select('.aw5cc a') changed by google in may 2019
-    relatedSearches = soup.select('p.nVcaUb > a')
-    #pprint(soup.select("p.nVcaUb > a")) # all a tag that inside p
+    # linkElems = soup.select('.r a') # osearch links and titles
+    linkElems = soup.select("div.g div.rc div.r a")  # osearch links and titles
+    # abstractElems = soup.select('.st') # osearch snippets
+    abstractElems = soup.select("div.g div.rc div.s div span.st")  # osearch snippets
+    #    relatedSearches = soup.select('.aw5cc a') changed by google in may 2019
+    relatedSearches = soup.select("p.nVcaUb > a")
+    # pprint(soup.select("p.nVcaUb > a")) # all a tag that inside p
 
     #   relatedQuestions = soup.select('.st span')
-    for i in soup.select("#resultStats"): # id="resultStats"
-       print("i.text: ")
-       print(i.text)
-       j = i.text.split()
-       print ("["+j[0]+"]")
-       print (j[1])
-       if (j[0] == "About"):
-           #if ( j[1].isnumeric() ):  has commas
-           if ( j[1][0].isdigit() ):
-               result_count = j[1]
-               if ( j[2] == "Million") or (j[2] == "million") :
-                   result_count += ",000,000"
-               elif ( j[2] == "Thousand") or (j[2] == "thousand"):
-                   result_count += ",000"
-               elif ( j[2] == "Results") or (j[2] == "results"):
-                   result_count += ""
-               else: 
-                   result_count = '-1'
-                   assert "Google sent a new resultStats string"
-           else:
-               result_count = '-2'
-       else:
-           result_count = '-3'
-       print("resultStats =", result_count)
+    for i in soup.select("#resultStats"):  # id="resultStats"
+        print("i.text: ")
+        print(i.text)
+        j = i.text.split()
+        print("[" + j[0] + "]")
+        print(j[1])
+        if j[0] == "About":
+            # if ( j[1].isnumeric() ):  has commas
+            if j[1][0].isdigit():
+                result_count = j[1]
+                if (j[2] == "Million") or (j[2] == "million"):
+                    result_count += ",000,000"
+                elif (j[2] == "Thousand") or (j[2] == "thousand"):
+                    result_count += ",000"
+                elif (j[2] == "Results") or (j[2] == "results"):
+                    result_count += ""
+                else:
+                    result_count = "-1"
+                    assert "Google sent a new resultStats string"
+            else:
+                result_count = "-2"
+        else:
+            result_count = "-3"
+        print("resultStats =", result_count)
 
-       #for m, k in enumerate(j):
-       #    print ("k = ", k)
-       #    print (j[m])
+        # for m, k in enumerate(j):
+        #    print ("k = ", k)
+        #    print (j[m])
     print("resultStats2 =", result_count)
 
     #   for titleElems in soup.find_all("div", "r"):
