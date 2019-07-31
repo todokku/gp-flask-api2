@@ -33,7 +33,7 @@ Jinja2==2.10.1
 kombu==4.6.3
 MarkupSafe==1.1.1
 mccabe==0.6.1
-more-itertools==7.1.0
+more-itertools==7.2.0
 packaging==19.0
 pbr==5.4.1
 pluggy==0.12.0
