@@ -3,8 +3,8 @@ from flask_cors import CORS
 
 # from celery import Celery
 
-## Rollbar init code. You'll need the following to use Rollbar with Flask.
-## This requires the 'blinker' package to be installed
+# Rollbar init code. You'll need the following to use Rollbar with Flask.
+# This requires the 'blinker' package to be installed
 
 import os
 import rollbar
@@ -18,6 +18,7 @@ from iSearchWsApi.blueprints.api.api import api
 
 # from iSearchWsApi.extensions import debug_toolbar, csrf
 from iSearchWsApi.extensions import csrf
+
 
 # application factory, see: http://flask.pocoo.org/docs/patterns/appfactories/
 # def create_app(settings_override=None):
