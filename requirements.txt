@@ -21,7 +21,7 @@ Flask==1.1.1
 Flask-Cors==3.0.8
 Flask-DebugToolbar==0.10.1
 Flask-WTF==0.14.2
-gitdb2==2.0.5
+gitdb2==2.0.6
 GitPython==3.0.3
 gunicorn==19.9.0
 idna==2.8
