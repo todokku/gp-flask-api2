@@ -152,6 +152,8 @@ http://localhost:8000/
 ## Flake8 - Linter
 ```
 (api2) C:\GitHub\gp-flask-api2>flake8 iSearchWsApi
+
+(api2) C:\GitHub\gp-flask-api2>flake8 iSearchWsApi --max-line-length=120
 ```
 
 ## Black - reformatter
