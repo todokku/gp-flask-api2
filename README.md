@@ -21,7 +21,7 @@ with Flask, Redis, and Docker.
 
 - Using Docker to "Dockerize" a multi-service Flask app
 - Flask blueprints
-- Testing and analyzing your code base (both mocked and live)
+- Testing and analyzing API code base (both mocked and live)
 - Creating a full blown user management system
 - Creating a custom admin dashboard
 - Logging, middleware and error handling
@@ -40,25 +40,25 @@ pip install -r requirements.txt
 ### activate VirtualEnv (api2)/workon api2
 
 ```
-C:\Users\x\Documents\GitHub\gp-flask-api2>workon api2
+C:\GitHub\gp-flask-api2>workon api2
 ```
 
 ### deactivate
 
 ```
-(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>deactivate
+(api2) C:\GitHub\gp-flask-api2>deactivate
 ```
 
 ### run the Flask app
 
 ```
-(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>python iSearchWsApi/app.py
+(api2) C:\GitHub\gp-flask-api2>python iSearchWsApi/app.py
 ```
 
 ### Unit and API testing (including live and mock API testing)
 
 ```
-(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>pytest -v iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>pytest -v iSearchWsApi
 (api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture live iSearchWsApi
 (api2) C:\GitHub\gp-flask-api2>pytest -v --tb=no --usesfixture live iSearchWsApi
 (api2) C:\GitHub\gp-flask-api2>pytest -v --usesfixture mock iSearchWsApi
@@ -73,8 +73,8 @@ C:\Users\x\Documents\GitHub\gp-flask-api2>workon api2
 ### Unit and API testing coverage
 
 ```
-(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>pytest --cov=iSearchWsApi iSearchWsApi
-(api2) C:\Users\x\Documents\GitHub\gp-flask-api2>coverage html
+(api2) C:\GitHub\gp-flask-api2>pytest --cov=iSearchWsApi iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>coverage html
 ```
 
 Then browse to htmlcov/index.html
@@ -95,7 +95,7 @@ http://localhost:5000/api/google?q=malpractice
 
 This can also be done interactivaly with Python on the command line:
 ```
-(hello) C:\Users\x\Documents\GitHub\gp-flask>python
+(hello) C:\GitHub\gp-flask-api2>python
 
 >>> import requests
 >>> response = requests.get("http://127.0.0.1:5000/api/google?q=malpractice")
@@ -123,7 +123,7 @@ $ gunicorn 'iSearchWsApi.app:create_app()'
 [2019-01-28 14:53:03 -0500] [16856] [INFO] Listening at: http://127.0.0.1:8000 (16856)
 [2019-01-28 14:53:03 -0500] [16856] [INFO] Using worker: sync
 [2019-01-28 14:53:03 -0500] [15976] [INFO] Booting worker with pid: 15976
-/cygdrive/c/Users/dbadmin/Documents/GitHub/gp-flask-api2/lib/python3.6/site-packages/flask/sessions.py:208: UserWarning: "localhost" is not a valid cookie domain, it must contain a ".". Add an entry to your hosts file, for example "localhost.localdomain", and use that instead.
+/cygdrive/c/GitHub/gp-flask-api2/lib/python3.6/site-packages/flask/sessions.py:208: UserWarning: "localhost" is not a valid cookie domain, it must contain a ".". Add an entry to your hosts file, for example "localhost.localdomain", and use that instead.
   ' "{rv}.localdomain", and use that instead.'.format(rv=rv)
 [2019-01-28 14:54:13 -0500] [16856] [CRITICAL] WORKER TIMEOUT (pid:15976)
 [2019-01-28 14:54:13 -0500] [15976] [INFO] Worker exiting (pid: 15976)
@@ -151,35 +151,36 @@ http://localhost:8000/
 
 ## Flake8 - Linter
 ```
-flake8 iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>flake8 iSearchWsApi
 ```
 
 ## Black - reformatter
 ```
-black iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>black iSearchWsApi
 ```
 
 ## Bandit - source code security analyzer
 
 Run for all issues for entire project
 ```
-bandit -r iSearchWsApi
+(api2) C:\GitHub\gp-flask-api2>bandit -r iSearchWsApi
 ```
 
 Show only high severity issues for entire project
 ```
-bandit -r iSearchWsApi -lll
+(api2) C:\GitHub\gp-flask-api2>bandit -r iSearchWsApi -lll
 ```
 
 Show only high severity issues for entire project and included files with score
 ```
-bandit -r iSearchWsApi -lll -v
+(api2) C:\GitHub\gp-flask-api2>bandit -r iSearchWsApi -lll -v
 ```
 
 Show only high severity issues for entire project and included files with score and ignore nosec comment action
 ```
-bandit -r iSearchWsApi -lll -v --ignore-nosec
+(api2) C:\GitHub\gp-flask-api2>bandit -r iSearchWsApi -lll -v --ignore-nosec
 ```
+
 ## Update version on home
 Update version in gp-flask-api2\iSearchWsApi\templates\layouts\base.html
 
@@ -199,7 +200,7 @@ Update version in gp-flask-api2\iSearchWsApi\templates\layouts\base.html
 
 ### Scraper stuff
 - [ ] Sessions and Cookies
-- [ ] Delays and Backing Off
+- [ ] Delays and Backing Off scraper
 - [ ] Spoofing and Cycling the User Agent
 - [ ] Using Proxy Servers
 - [ ] Setting Timeouts
@@ -209,6 +210,11 @@ Update version in gp-flask-api2\iSearchWsApi\templates\layouts\base.html
 ### Service stuff
 - [ ] Authentication
 - [ ] Logging
+
+### API stuff
+- [ ] DDOS protection
+- [ ] API Key support
+- [ ] CORS support
 
 ## Links
 
