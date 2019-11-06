@@ -6,18 +6,15 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-node_modules/
 bin/
 build/manifest.json
 develop-eggs/
-dist/
 eggs/
 include/
 lib/
 parts/
 sdist/
 var/
-npm-debug.log
 .installed.cfg
 *.egg
 
