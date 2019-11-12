@@ -9,4 +9,5 @@ from iSearchWsApi.app import create_app
 
 application = create_app("config.settings_production")
 
-application.run()
+# added guard - as gunicorn should not need it
+#application.run()
