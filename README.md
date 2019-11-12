@@ -113,12 +113,14 @@ python3 /cygdrive/c/Users/x/AppData/Local/Programs/Python/Python37/Lib/site-pack
 
 source bin/activate
 
+cd /cygdrive/c/Users/x/Documents/GitHub/gp-flask-api2
+
 pip install -r requirements.txt
 
 ```
 
 ```
-$ gunicorn 'iSearchWsApi.app:create_app()'
+$ gunicorn 'iSearchWsApi.wsgi:create_app()'
 [2019-01-28 14:53:03 -0500] [16856] [INFO] Starting gunicorn 19.9.0
 [2019-01-28 14:53:03 -0500] [16856] [INFO] Listening at: http://127.0.0.1:8000 (16856)
 [2019-01-28 14:53:03 -0500] [16856] [INFO] Using worker: sync
@@ -134,19 +136,28 @@ $ gunicorn 'iSearchWsApi.app:create_app()'
 --check-config appears to fail
 
 ```
-$ gunicorn --log-level=DEBUG 'iSearchWsApi.app:create_app("config.settings_production")'
+$ gunicorn --log-level=DEBUG 'iSearchWsApi.wsgi:create_app("config.settings_production")'
 ```
 
 ```
-$ gunicorn --log-level=DEBUG --spew 'iSearchWsApi.app:create_app("config.settings_production")'
+$ gunicorn --log-level=DEBUG --spew 'iSearchWsApi.wsgi:create_app("config.settings_production")'
 ```
-To test CygWin gunicorn:
+
 ```
-http://localhost:8000/search/google?q=car%20seats
+$ gunicorn --bind 0.0.0.0:5000 iSearchWsApi.wsgi
 
 or
 
-http://localhost:8000/
+$ gunicorn iSearchWsApi.wsgi
+```
+
+To test CygWin gunicorn:
+```
+http://localhost:5000/search/google?q=car%20seats
+
+or
+
+http://localhost:5000/
 ```
 
 ## Flake8 - Linter
