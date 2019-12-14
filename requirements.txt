@@ -23,7 +23,7 @@ Flask-DebugToolbar==0.10.1
 Flask-WTF==0.14.2
 gitdb2==2.0.6
 GitPython==3.0.5
-gunicorn==20.0.0
+gunicorn==20.0.4
 idna==2.8
 importlib-metadata==0.23
 infinity==1.4
