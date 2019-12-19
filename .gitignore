@@ -58,3 +58,5 @@ instance/settings.py
 *.production_example
 instance/settings.py.production_example
 all_issues.csv
+all_issues.xlsx
+~$all_issues.xlsx
