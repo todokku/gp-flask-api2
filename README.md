@@ -42,6 +42,10 @@ pip install -r requirements.txt
 ```
 C:\GitHub\gp-flask-api2>workon api2
 ```
+or
+```
+..\..\..\Envs\api2\Scripts\activate.bat
+```
 
 ### deactivate
 
