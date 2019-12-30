@@ -350,10 +350,15 @@ def serpApi():
         print("\n\nsearchMetadata")
         print(data["search_metadata"], sep="\n")
 
+    if data["search_information"]:
         print(data["search_information"])
-        print(data["search_information"]["total_results"])
-        # print(data["search_information.total_results"])
-        result_count = data["search_information"]["total_results"]
+        try:
+            print(data["search_information"]["total_results"])
+            # print(data["search_information.total_results"])
+            result_count = data["search_information"]["total_results"]
+        except:
+            print("data[search_information][total_results] is missing key total_results")
+            result_count = 0
 
     if data["organic_results"]:
         if verbose > 3:
