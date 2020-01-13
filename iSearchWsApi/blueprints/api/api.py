@@ -315,7 +315,8 @@ def serpApi():
             "https://serpapi.com/search.json?q="
             + q
             + "&hl=en&gl=us&google_domain=google.com"
-            + "&num=30"
+         #   + "&num=30"
+            + "&num=30&engine=google"
             + "&api_key=194a4b22789db07b2e0957b87615316d0f0045918a9dd4b5f8e8162b4020da43"
         )
         print(res)
