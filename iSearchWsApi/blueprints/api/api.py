@@ -131,6 +131,7 @@ def googleApi():
     # pprint(soup.select("p.nVcaUb > a")) # all a tag that inside p
 
     #   relatedQuestions = soup.select('.st span')
+    result_count = 0  # default
     for i in soup.select("#resultStats"):  # id="resultStats"
         print("i.text: ")
         print(i.text)

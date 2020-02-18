@@ -129,6 +129,7 @@ def parseJsonResults(dicResults, q):
     # result_count = soup.select('.resultStats')
 
     print(".resultStats")
+    result_count = 0  # default
     for i in soup.select("#resultStats"):
         print("i.text: ")
         print(i.text)
