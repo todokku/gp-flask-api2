@@ -372,7 +372,7 @@ def serpApi():
         # print(res.organic_results)
         # print(*abstractElems, sep="\n")
 
-    if data["related_searches"]:
+    if "related_searches" in data:
         if verbose > 3:
             print("\n\nrelatedSearches")
             print(data["related_searches"], sep="\n")
